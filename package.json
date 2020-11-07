@@ -1,0 +1,27 @@
+{
+	"name": "ninozfantasysports-graphql",
+	"version": "0.0.1",
+	"description": "GraphQL backend for ninozfantasysports",
+	"main": "index.tsx",
+	"scripts": {
+		"serve": "NODE_ENV=development firebase serve --only functions",
+		"deploy": "firebase deploy --only functions",
+		"clean": "rimraf 'dist/functions'",
+		"build:funcs-dev": "tsc --watch --sourceMap",
+		"build:funcs-prod": "tsc",
+		"deps:copy": "cpx '*{package.json,package-lock.json}' 'dist/functions'",
+		"deps:install": "cd 'dist/functions' && npm install",
+		"build:funcs-full": "npm run clean && npm run deps:copy && npm run deps:install && npm run build:funcs-prod"
+	},
+	"author": "Marc Arbesman <marc@ninozfantasysports.com>",
+	"license": "ISC",
+	"devDependencies": {
+		"cpx": "^1.5.0",
+		"source-map-loader": "^1.1.2",
+		"ts-loader": "^8.0.10",
+		"typescript": "^4.0.5"
+	},
+	"dependencies": {
+		"@types/firebase": "^3.2.1"
+	}
+}
