@@ -4,12 +4,12 @@
 	"description": "GraphQL backend for ninozfantasysports",
 	"main": "index.js",
 	"scripts": {
-		"serve": "NODE_ENV=development firebase serve --only functions",
+        "serve": "NODE_ENV=development firebase serve --only functions",
 		"deploy": "firebase deploy --only functions",
 		"clean": "rimraf 'dist/functions'",
 		"build:funcs-dev": "tsc --watch --sourceMap",
 		"build:funcs-prod": "tsc",
-		"deps:copy": "cpx '*{package.json,package-lock.json}' 'dist/functions'",
+		"deps:copy": "cpx '*{package.json,package-lock.json}' 'dist/functions' && cpx '.env.production' 'dist/functions'",
 		"deps:install": "cd 'dist/functions' && npm install",
 		"build:funcs-full": "npm run clean && npm run deps:copy && npm run deps:install && npm run build:funcs-prod"
 	},
@@ -25,9 +25,14 @@
 	"dependencies": {
 		"@types/firebase": "^3.2.1",
 		"apollo-server-cloud-functions": "^2.19.0",
+		"class-validator": "^0.12.2",
+		"dotenv": "^8.2.0",
 		"firebase-admin": "^9.3.0",
 		"firebase-functions": "^3.11.0",
-		"graphql": "^15.4.0"
+		"fireorm": "^0.17.2",
+		"graphql": "^15.4.0",
+		"reflect-metadata": "^0.1.13",
+		"type-graphql": "^1.1.1"
 	},
 	"engines": {
 		"node": "12"

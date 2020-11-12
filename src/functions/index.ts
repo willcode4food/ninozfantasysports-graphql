@@ -1,25 +1,21 @@
-const { ApolloServer, gql } = require('apollo-server-cloud-functions')
-const functions = require('firebase-functions')
+import { ApolloServer } from 'apollo-server-cloud-functions'
+import * as functions from 'firebase-functions'
+import { buildSchemaSync } from 'type-graphql'
+import { initialize } from './connection'
+import path from 'path'
 
-// Construct a schema, using GraphQL schema language
-const typeDefs = gql`
-    type Query {
-        hello: String
-    }
-`
+initialize()
 
-// Provide resolver functions for your schema fields
-const resolvers = {
-    Query: {
-        hello: () => 'Hello world!',
-    },
-}
+import { UserResolver } from './resolvers/users'
 
+const schema = buildSchemaSync({
+    resolvers: [UserResolver],
+    emitSchemaFile: path.resolve('/tmp', 'schema.gql'),
+    validate: false,
+})
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema,
     playground: true,
     introspection: true,
 })
-
 exports.api = functions.https.onRequest(server.createHandler())
