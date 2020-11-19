@@ -18,4 +18,11 @@ const server = new ApolloServer({
     playground: true,
     introspection: true,
 })
-exports.api = functions.https.onRequest(server.createHandler())
+exports.api = functions.https.onRequest(
+    server.createHandler({
+        cors: {
+            origin: '*',
+            credentials: false,
+        },
+    })
+)

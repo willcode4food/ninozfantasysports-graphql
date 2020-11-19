@@ -7,7 +7,7 @@ export class User {
     @Field(() => ID)
     id: string
     @Field()
-    dateCreated: string
+    dateCreated: Date
     @Field()
     defaultAvatarThemeIndex: number
     @Field()
@@ -22,9 +22,16 @@ export class User {
     profileImageName: string
     @Field()
     username: string
+    @Field()
+    city: string
+    @Field()
+    state: string
+    @Field()
+    zip: string
+
     constructor() {
         this.id = ''
-        this.dateCreated = ''
+        this.dateCreated = new Date()
         this.defaultAvatarThemeIndex = 0
         this.email = ''
         this.firstName = ''
@@ -32,6 +39,9 @@ export class User {
         this.loginProvider = ''
         this.profileImageName = ''
         this.username = ''
+        this.city = ''
+        this.state = ''
+        this.zip = ''
     }
 }
 

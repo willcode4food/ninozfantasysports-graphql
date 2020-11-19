@@ -5,7 +5,9 @@ import { User } from '../../entites/Users'
 @InputType()
 export class UserInput implements Partial<User> {
     @Field()
-    dateCreated: string
+    id: string
+    @Field()
+    dateCreated: Date
     @Field()
     defaultAvatarThemeIndex: number
     @Field()
@@ -22,8 +24,15 @@ export class UserInput implements Partial<User> {
     @Field()
     @Length(1, 255)
     username: string
+    @Field()
+    city: string
+    @Field()
+    state: string
+    @Field()
+    zip: string
     constructor() {
-        this.dateCreated = ''
+        this.id = ''
+        this.dateCreated = new Date()
         this.defaultAvatarThemeIndex = 0
         this.email = ''
         this.firstName = ''
@@ -31,5 +40,8 @@ export class UserInput implements Partial<User> {
         this.loginProvider = ''
         this.profileImageName = ''
         this.username = ''
+        this.city = ''
+        this.state = ''
+        this.zip = ''
     }
 }
