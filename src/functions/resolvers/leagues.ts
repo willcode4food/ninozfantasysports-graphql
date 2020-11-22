@@ -48,8 +48,8 @@ export class LeagueResolver {
         }
         return league
     }
-    @Mutation(() => League)
-    async removeSingleLeague(@Arg('data') { id }: LeagueInput): Promise<boolean> {
+    @Mutation(() => Boolean)
+    async removeSingleLeague(@Arg('id') id: string): Promise<boolean> {
         try {
             await LeagueRepository.delete(id)
         } catch (e) {
