@@ -9,6 +9,8 @@ export class User {
     @Field()
     dateCreated: Date
     @Field()
+    dateUpdated: Date
+    @Field()
     defaultAvatarThemeIndex: number
     @Field()
     email: string
@@ -32,6 +34,7 @@ export class User {
     constructor() {
         this.id = ''
         this.dateCreated = new Date()
+        this.dateUpdated = new Date()
         this.defaultAvatarThemeIndex = 0
         this.email = ''
         this.firstName = ''

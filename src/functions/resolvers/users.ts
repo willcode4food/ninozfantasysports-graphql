@@ -26,6 +26,8 @@ export class UserResolver {
         entity.city = city
         entity.state = state
         entity.zip = zip
+        entity.dateCreated = new Date()
+        entity.dateUpdated = new Date()
         const user = await UserRepository.create(entity)
         return user
     }
@@ -44,6 +46,7 @@ export class UserResolver {
             state: '',
             zip: '',
             dateCreated: new Date(),
+            dateUpdated: new Date(),
             defaultAvatarThemeIndex: 0,
             loginProvider: 'email',
         }
@@ -58,7 +61,7 @@ export class UserResolver {
             userToUpdate.city = city || userToUpdate.city
             userToUpdate.state = state || userToUpdate.state
             userToUpdate.zip = zip || userToUpdate.zip
-            console.log('UserResolver -> @Arg -> userToUpdate', userToUpdate)
+            userToUpdate.dateUpdated = new Date()
             user = await UserRepository.update(userToUpdate)
             return user
         } catch (e) {
