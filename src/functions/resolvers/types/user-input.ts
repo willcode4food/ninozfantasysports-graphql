@@ -7,12 +7,6 @@ export class UserInput implements Partial<User> {
     @Field()
     id: string
     @Field()
-    @IsDate()
-    dateCreated: Date
-    @Field()
-    @IsDate()
-    dateUpdated: Date
-    @Field()
     @IsIn([0, 1, 2, 3])
     defaultAvatarThemeIndex: number
     @Field()
@@ -45,8 +39,6 @@ export class UserInput implements Partial<User> {
 
     constructor() {
         this.id = ''
-        this.dateCreated = new Date()
-        this.dateUpdated = new Date()
         this.defaultAvatarThemeIndex = 0
         this.email = ''
         this.firstName = ''

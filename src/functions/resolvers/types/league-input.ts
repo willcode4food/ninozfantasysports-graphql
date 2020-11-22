@@ -7,13 +7,8 @@ export class LeagueInput implements Partial<League> {
     @Field()
     id: string
     @Field()
-    @IsDate()
-    dateCreated: Date
-    @Field()
-    @IsDate()
-    dateUpdated: Date
-    @Field()
     @Length(2, 255)
+    @IsNotEmpty()
     name: string
     @Field()
     @IsNotEmpty()
@@ -25,8 +20,6 @@ export class LeagueInput implements Partial<League> {
 
     constructor() {
         this.id = ''
-        this.dateCreated = new Date()
-        this.dateUpdated = new Date()
         this.name = ''
         this.ownerId = ''
         this.type = ''

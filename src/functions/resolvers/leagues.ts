@@ -20,11 +20,13 @@ export class LeagueResolver {
         entity.name = name
         entity.ownerId = ownerId
         entity.type = type
+        entity.dateCreated = new Date()
+        entity.dateUpdated = new Date()
         const league = await LeagueRepository.create(entity)
         return league
     }
     @Mutation(() => League)
-    async updateLeague(@Arg('date') { id, name, ownerId, type }: LeagueInput): Promise<League> {
+    async updateLeague(@Arg('data') { id, name, ownerId, type }: LeagueInput): Promise<League> {
         let league: League = {
             id: '',
             name: '',
@@ -45,5 +47,15 @@ export class LeagueResolver {
             console.log(e.message)
         }
         return league
+    }
+    @Mutation(() => League)
+    async removeSingleLeague(@Arg('data') { id }: LeagueInput): Promise<boolean> {
+        try {
+            await LeagueRepository.delete(id)
+        } catch (e) {
+            console.log(e.message)
+            return false
+        }
+        return true
     }
 }
