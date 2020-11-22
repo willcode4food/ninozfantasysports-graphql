@@ -7,9 +7,11 @@ import path from 'path'
 initialize()
 
 import { UserResolver } from './resolvers/users'
+import { LeagueResolver } from './resolvers/leagues'
 
 const schema = buildSchemaSync({
-    resolvers: [UserResolver],
+    resolvers: [UserResolver, LeagueResolver],
+    // TODO: make tmp dir local to project in development
     emitSchemaFile: path.resolve('/tmp', 'schema.gql'),
     validate: false,
 })
