@@ -2,15 +2,18 @@ import { ApolloServer } from 'apollo-server-cloud-functions'
 import * as functions from 'firebase-functions'
 import { buildSchemaSync } from 'type-graphql'
 import { initialize } from './connection'
-import path from 'path'
+require('dotenv')
 
 initialize()
 
-import { UserResolver } from './resolvers/users'
+import { UserResolver } from './resolvers/UserResolver'
+import { LeagueResolver } from './resolvers/LeagueResolver'
+import { SeasonResolver } from './resolvers/SeasonResolver'
 
+const schemaPath = process.env.NODE_ENV === 'development' ? './tmp' : '/tmp'
 const schema = buildSchemaSync({
-    resolvers: [UserResolver],
-    emitSchemaFile: path.resolve('/tmp', 'schema.gql'),
+    resolvers: [UserResolver, LeagueResolver, SeasonResolver],
+    emitSchemaFile: `${schemaPath}/schema.gql`,
     validate: false,
 })
 const server = new ApolloServer({

@@ -4,21 +4,28 @@
 	"description": "GraphQL backend for ninozfantasysports",
 	"main": "index.js",
 	"scripts": {
-        "serve": "NODE_ENV=development firebase serve --only functions",
-		"deploy": "firebase deploy --only functions",
+		"serve": "NODE_ENV=development firebase serve --only functions",
+		"deploy": "npm run build:funcs-full && firebase deploy --only functions",
 		"clean": "rimraf 'dist/functions'",
-		"build:funcs-dev": "tsc --watch --sourceMap",
+		"build:funcs-dev": "npm run deps:copy && npm run deps:install && tsc --watch --sourceMap",
 		"build:funcs-prod": "tsc",
 		"deps:copy": "cpx '*{package.json,package-lock.json}' 'dist/functions' && cpx '.env.production' 'dist/functions'",
 		"deps:install": "cd 'dist/functions' && npm install",
-		"build:funcs-full": "npm run clean && npm run deps:copy && npm run deps:install && npm run build:funcs-prod"
+		"build:funcs-full": "npm run clean && npm run deps:copy && npm run deps:install && npm run build:funcs-prod",
+        "test": "jest src",
+        "test-coverage": "jest src --collect-coverage"
 	},
 	"author": "Marc Arbesman <marc@ninozfantasysports.com>",
 	"license": "ISC",
 	"devDependencies": {
+		"@google-cloud/firestore": "^4.7.1",
+		"@types/jest": "^26.0.15",
 		"@types/node": "^14.14.6",
 		"cpx": "^1.5.0",
+		"jest": "^26.6.3",
+		"mock-cloud-firestore": "^0.12.0",
 		"source-map-loader": "^1.1.2",
+		"ts-jest": "^26.4.4",
 		"ts-loader": "^8.0.10",
 		"typescript": "^4.0.5"
 	},

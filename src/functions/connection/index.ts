@@ -1,11 +1,10 @@
 import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
-import { Storage } from '@google-cloud/storage'
-import * as dotenv from 'dotenv'
+// import { Storage } from '@google-cloud/storage'
+require('dotenv')
 import * as fireorm from 'fireorm'
 
 export function initialize() {
-    const storage = new Storage()
     const config = {
         apiKey: process.env.APIKEY,
         authDomain: process.env.AUTHDOMAIN,
@@ -17,8 +16,8 @@ export function initialize() {
     admin.initializeApp(functions.config().firebase)
 
     const firestore = admin.firestore()
-    const settings = { timestampsInSnapshots: true }
-    const storageBucket = process.env.STORAGEBUCKET
+    const settings = { timestampsInSnapshots: true, ignoreUndefinedProperties: true }
+    // const storageBucket = process.env.STORAGEBUCKET
 
     firestore.settings(settings)
     fireorm.initialize(firestore)
