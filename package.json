@@ -8,7 +8,7 @@
 		"deploy": "npm run build:funcs-full && firebase deploy --only functions",
 		"clean": "rimraf 'dist/functions'",
 		"build:funcs-dev": "npm run deps:copy && npm run deps:install && tsc --watch --sourceMap",
-		"build:funcs-prod": "tsc",
+		"build:funcs-prod": "tsc && find dist/functions -type d -name '__tests__' -exec rm -r {} +",
 		"deps:copy": "cpx '*{package.json,package-lock.json}' 'dist/functions' && cpx '.env.production' 'dist/functions'",
 		"deps:install": "cd 'dist/functions' && npm install",
 		"build:funcs-full": "npm run clean && npm run deps:copy && npm run deps:install && npm run build:funcs-prod",

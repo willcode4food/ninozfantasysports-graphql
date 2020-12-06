@@ -12,8 +12,8 @@ export class IsEmailAlreadyExistsConstraint implements ValidatorConstraintInterf
         return UserRepository.whereEqualTo('email', email)
             .findOne()
             .then((user) => {
-                if (user) return false
-                return true
+                if (user) return true
+                return false
             })
     }
 }
