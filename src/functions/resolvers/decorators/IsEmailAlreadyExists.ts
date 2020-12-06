@@ -17,8 +17,9 @@ export class IsEmailAlreadyExistsConstraint implements ValidatorConstraintInterf
             })
     }
 }
-
+// istanbul ignore next
 export function IsEmailAlreadyExists(validationOptions?: ValidationOptions) {
+    // istanbul ignore next
     return function (object: Object, propertyName: string) {
         registerDecorator({
             target: object.constructor,

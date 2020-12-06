@@ -18,7 +18,9 @@ export class IsUsernameAlreadyExistsConstraint implements ValidatorConstraintInt
     }
 }
 
+// istanbul ignore next
 export function IsUsernameAlreadyExists(validationOptions?: ValidationOptions) {
+    // istanbul ignore next
     return function (object: Object, propertyName: string) {
         registerDecorator({
             target: object.constructor,

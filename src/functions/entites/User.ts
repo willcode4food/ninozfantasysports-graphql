@@ -1,10 +1,14 @@
 import { getRepository, Collection } from 'fireorm'
 import { ObjectType, Field, ID, Int } from 'type-graphql'
 
+export const returnId = () => ID
+export const returnInt = () => Int
+
 @Collection('users')
 @ObjectType({ description: 'The Users model' })
 export class User {
-    @Field(() => ID)
+    // istanbul ignore next
+    @Field(returnId)
     id: string
 
     @Field()
@@ -13,7 +17,8 @@ export class User {
     @Field()
     dateUpdated: Date
 
-    @Field(() => Int)
+    // istanbul ignore next
+    @Field(returnInt)
     defaultAvatarThemeIndex: number
 
     @Field()
