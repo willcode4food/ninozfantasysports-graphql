@@ -12,8 +12,8 @@ export class IsUsernameAlreadyExistsConstraint implements ValidatorConstraintInt
         return UserRepository.whereEqualTo('username', username)
             .findOne()
             .then((user) => {
-                if (user) return false
-                return true
+                if (user) return true
+                return false
             })
     }
 }
