@@ -16,7 +16,19 @@ export class UserResolver {
     @Mutation(() => User)
     async createUser(
         @Arg('data', { validate: true })
-        { id, username, email, firstName, lastName, profileImageName, city, state, zip }: UserInput
+        {
+            id,
+            username,
+            email,
+            firstName,
+            lastName,
+            profileImageName,
+            loginProvider,
+            defaultAvatarThemeIndex,
+            city,
+            state,
+            zip,
+        }: UserInput
     ): Promise<User> {
         const entity = new User()
         entity.id = id
@@ -25,6 +37,8 @@ export class UserResolver {
         entity.firstName = firstName
         entity.lastName = lastName
         entity.profileImageName = profileImageName
+        entity.loginProvider = loginProvider
+        entity.defaultAvatarThemeIndex = defaultAvatarThemeIndex
         entity.city = city
         entity.state = state
         entity.zip = zip

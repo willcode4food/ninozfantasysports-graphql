@@ -3,7 +3,7 @@
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "baseUrl": "./src",
-        "outDir": "./dist/functions",
+        "outDir": "dist/functions",
         "sourceMap": true,
         "declaration": false,
         "composite": false,
