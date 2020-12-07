@@ -7,19 +7,19 @@ import {
 import { UserRepository } from '../../entites/User'
 
 @ValidatorConstraint({ async: true })
-export class IsUsernameAlreadyExistsConstraint implements ValidatorConstraintInterface {
+export class IsNotUsernameAlreadyExistsConstraint implements ValidatorConstraintInterface {
     validate(username: string) {
         return UserRepository.whereEqualTo('username', username)
             .findOne()
             .then((user) => {
-                if (user) return true
-                return false
+                if (user) return false
+                return true
             })
     }
 }
 
 // istanbul ignore next
-export function IsUsernameAlreadyExists(validationOptions?: ValidationOptions) {
+export function IsNotUsernameAlreadyExists(validationOptions?: ValidationOptions) {
     // istanbul ignore next
     return function (object: Object, propertyName: string) {
         registerDecorator({
@@ -27,7 +27,7 @@ export function IsUsernameAlreadyExists(validationOptions?: ValidationOptions) {
             propertyName: propertyName,
             options: validationOptions,
             constraints: [],
-            validator: IsUsernameAlreadyExistsConstraint,
+            validator: IsNotUsernameAlreadyExistsConstraint,
         })
     }
 }

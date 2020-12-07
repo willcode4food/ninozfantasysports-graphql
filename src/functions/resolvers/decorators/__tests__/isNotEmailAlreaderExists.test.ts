@@ -26,17 +26,17 @@ describe('Email Exists Input Validator - Custom Decorator', () => {
     })
 
     it('returns true if email already exists', async () => {
-        const { IsEmailAlreadyExistsConstraint } = require('../IsEmailAlreadyExists')
-        const isEmailAlreadyExist = await IsEmailAlreadyExistsConstraint.prototype.validate(
+        const { IsNotEmailAlreadyExistsConstraint } = require('../IsNotEmailAlreadyExists')
+        const isEmailAlreadyExist = await IsNotEmailAlreadyExistsConstraint.prototype.validate(
             'hsimpson@springfieldpower.com'
         )
-        expect(isEmailAlreadyExist).toBe(true)
+        expect(isEmailAlreadyExist).toBe(false)
     })
     it('returns false if email does not exist', async () => {
-        const { IsEmailAlreadyExistsConstraint } = require('../IsEmailAlreadyExists')
-        const isEmailAlreadyExist = await IsEmailAlreadyExistsConstraint.prototype.validate(
+        const { IsNotEmailAlreadyExistsConstraint } = require('../IsNotEmailAlreadyExists')
+        const isEmailAlreadyExist = await IsNotEmailAlreadyExistsConstraint.prototype.validate(
             'lsimpson@springfieldpower.com'
         )
-        expect(isEmailAlreadyExist).toBe(false)
+        expect(isEmailAlreadyExist).toBe(true)
     })
 })

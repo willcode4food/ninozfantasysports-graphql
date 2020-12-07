@@ -1,4 +1,4 @@
-import { IsUsernameAlreadyExists } from './IsUsernameAlreadyExists'
-import { IsEmailAlreadyExists } from './IsEmailAlreadyExists'
+import { IsNotUsernameAlreadyExists } from './IsNotUsernameAlreadyExists'
+import { IsNotEmailAlreadyExists } from './IsNotEmailAlreadyExists'
 
-export { IsUsernameAlreadyExists, IsEmailAlreadyExists }
+export { IsNotUsernameAlreadyExists, IsNotEmailAlreadyExists }
