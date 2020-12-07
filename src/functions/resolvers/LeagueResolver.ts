@@ -14,7 +14,12 @@ export class LeagueResolver {
 
     @Query(() => [League])
     async returnAllLeagues(): Promise<League[]> {
-        return LeagueRepository.find()
+        const allLeagues = await LeagueRepository.find()
+        const allSeasons = await SeasonRepository.find()
+        return allLeagues.map((league) => {
+            const seasons = allSeasons.filter((season) => league.id === season.leagueId)
+            return { ...league, seasons }
+        })
     }
 
     @Mutation(() => League)
