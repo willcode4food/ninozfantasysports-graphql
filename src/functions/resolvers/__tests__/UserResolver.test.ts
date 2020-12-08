@@ -44,6 +44,24 @@ describe('User Resolver', () => {
             }
         }
     `
+    const updateUserMutation = `
+        mutation UpdateUser($data: UserUpdateInput!) {
+            updateUser(data: $data) {
+                firstName
+                lastName
+                email
+                username
+                id
+                loginProvider
+                defaultAvatarThemeIndex
+            }
+        }
+    `
+    const removesUserMutation = `
+        mutation RemoveUser($id: String!) {
+            removeSingleUser(id: $id) 
+        }
+    `
     const getAllUsersQuery = `
         {
             returnAllUsers{
@@ -83,6 +101,34 @@ describe('User Resolver', () => {
 
         expect(response.data.returnSingleUser.firstName).toBe('Homer')
     })
+    it('is a resolver of type User', () => {
+        const { resolveUser } = require('../UserResolver')
+        const { User } = require('../../entites/User')
+        expect(resolveUser()).toBe(User)
+    })
+    it('removes a user', async () => {
+        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+
+        const responseBefore = await graphqlCall({
+            source: getAllUsersQuery,
+        })
+
+        expect(responseBefore.data.returnAllUsers.length).toBe(2)
+        const userIdToRemove = 'QUsewNSXhRJuoKZoqiqdgIDWHp2'
+
+        const responseRemove = await graphqlCall({
+            source: removesUserMutation,
+            variableValues: {
+                id: userIdToRemove,
+            },
+        })
+
+        const responseAfter = await graphqlCall({
+            source: getAllUsersQuery,
+        })
+
+        expect(responseAfter.data.returnAllUsers.length).toBe(1)
+    })
     it('create user', async () => {
         // graphql
         const { graphqlCall } = require('../../../test-utils/graphqlCall')
@@ -106,6 +152,41 @@ describe('User Resolver', () => {
             },
         })
         expect(response.data.createUser).toMatchObject({
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            username: user.username,
+            defaultAvatarThemeIndex: user.defaultAvatarThemeIndex,
+            loginProvider: user.loginProvider,
+        })
+    })
+
+    it('updates user', async () => {
+        // graphql
+        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const userId = 'AUsewNSXhRJuoKZoqiqdgIDWHp2'
+        const user = {
+            id: userId,
+            firstName: 'Herb',
+            lastName: 'Powell',
+            email: 'hpowell@kompany.zone',
+            username: 'hpowell',
+            defaultAvatarThemeIndex: 0,
+            loginProvider: 'email',
+            profileImageName: '',
+            city: '',
+            state: '',
+            zip: '',
+        }
+        const response = await graphqlCall({
+            source: updateUserMutation,
+            variableValues: {
+                data: user,
+            },
+        })
+
+        expect(response.data.updateUser).toMatchObject({
             id: user.id,
             firstName: user.firstName,
             lastName: user.lastName,

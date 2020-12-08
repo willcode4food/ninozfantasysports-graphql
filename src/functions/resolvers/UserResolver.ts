@@ -1,7 +1,9 @@
 import { Resolver, Mutation, Arg, Query } from 'type-graphql'
 import { User, UserRepository } from '../entites/User'
-import { UserInput } from './types'
-@Resolver((_of) => User)
+import { UserInput, UserUpdateInput } from './types'
+
+export const resolveUser = () => User
+@Resolver(resolveUser)
 export class UserResolver {
     @Query((_returns) => User, { nullable: false })
     async returnSingleUser(@Arg('id') id: string): Promise<User> {
@@ -50,7 +52,19 @@ export class UserResolver {
     @Mutation(() => User)
     async updateUser(
         @Arg('data', { validate: true })
-        { id, username, email, firstName, lastName, profileImageName, city, state, zip }: UserInput
+        {
+            id,
+            email,
+            firstName,
+            lastName,
+            profileImageName,
+            city,
+            state,
+            username,
+            zip,
+            loginProvider,
+            defaultAvatarThemeIndex,
+        }: UserUpdateInput
     ): Promise<User> {
         let user: User = {
             id: '',
@@ -70,21 +84,23 @@ export class UserResolver {
 
         try {
             const userToUpdate = await UserRepository.findById(id)
-            userToUpdate.email = email || userToUpdate.email
-            userToUpdate.username = username || userToUpdate.username
-            userToUpdate.firstName = firstName || userToUpdate.firstName
-            userToUpdate.lastName = lastName || userToUpdate.lastName
-            userToUpdate.profileImageName = profileImageName || userToUpdate.profileImageName
-            userToUpdate.city = city || userToUpdate.city
-            userToUpdate.state = state || userToUpdate.state
-            userToUpdate.zip = zip || userToUpdate.zip
+            userToUpdate.email = email || userToUpdate.email || ''
+            userToUpdate.firstName = firstName || userToUpdate.firstName || ''
+            userToUpdate.lastName = lastName || userToUpdate.lastName || ''
+            userToUpdate.profileImageName = profileImageName || userToUpdate.profileImageName || ''
+            userToUpdate.loginProvider = loginProvider || userToUpdate.loginProvider || ''
+            userToUpdate.defaultAvatarThemeIndex = defaultAvatarThemeIndex || userToUpdate.defaultAvatarThemeIndex || 0
+            userToUpdate.username = username || ''
+            userToUpdate.city = city || userToUpdate.city || ''
+            userToUpdate.state = state || userToUpdate.state || ''
+            userToUpdate.zip = zip || userToUpdate.zip || ''
             userToUpdate.dateUpdated = new Date()
             user = await UserRepository.update(userToUpdate)
             return user
         } catch (e) {
             console.log(e.message)
+            return user
         }
-        return user
     }
 
     @Mutation(() => Boolean)
