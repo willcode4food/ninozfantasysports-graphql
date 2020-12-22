@@ -129,7 +129,34 @@ describe('User Resolver', () => {
 
         expect(responseAfter.data.returnAllUsers.length).toBe(1)
     })
-    it('create user', async () => {
+
+    it('throws an error if invalid ID when updating a user', async () => {
+        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const userId = '111AUsewddNSXhRJuoKZoqiqdgIDWHp2'
+        const user = {
+            id: userId,
+            firstName: 'Herb',
+            lastName: 'Powell',
+            email: 'hpowell@kompany.zone',
+            username: 'hpowell',
+            defaultAvatarThemeIndex: 0,
+            loginProvider: 'email',
+            profileImageName: '',
+            city: '',
+            state: '',
+            zip: '',
+        }
+        const response = await graphqlCall({
+            source: updateUserMutation,
+            variableValues: {
+                data: user,
+            },
+        })
+
+        expect(response.data).toBe(null)
+        expect(response.errors.length).toBeGreaterThan(0)
+    })
+    it('creates a user', async () => {
         // graphql
         const { graphqlCall } = require('../../../test-utils/graphqlCall')
         const user = {
@@ -162,8 +189,7 @@ describe('User Resolver', () => {
         })
     })
 
-    it('updates user', async () => {
-        // graphql
+    it('updates a user', async () => {
         const { graphqlCall } = require('../../../test-utils/graphqlCall')
         const userId = 'AUsewNSXhRJuoKZoqiqdgIDWHp2'
         const user = {
@@ -196,7 +222,7 @@ describe('User Resolver', () => {
             loginProvider: user.loginProvider,
         })
     })
-    it('throws error for duplicate email', async () => {
+    it('throws an error for a duplicate email when creating a new user', async () => {
         const { graphqlCall } = require('../../../test-utils/graphqlCall')
         const user = {
             id: 'sdfasdfasdf',
@@ -220,7 +246,7 @@ describe('User Resolver', () => {
         expect(response.errors.length).toBeGreaterThan(0)
     })
 
-    it('throws error for duplicate username', async () => {
+    it('throws an error for a duplicate username when creating a new user', async () => {
         const { graphqlCall } = require('../../../test-utils/graphqlCall')
         const user = {
             id: 'sdfasdfasdf',

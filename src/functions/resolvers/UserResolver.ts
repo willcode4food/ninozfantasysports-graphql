@@ -84,6 +84,10 @@ export class UserResolver {
 
         try {
             const userToUpdate = await UserRepository.findById(id)
+            if (!userToUpdate) {
+                console.log('UserId is invalid')
+                throw new TypeError('UserId is invalid')
+            }
             userToUpdate.email = email || userToUpdate.email || ''
             userToUpdate.firstName = firstName || userToUpdate.firstName || ''
             userToUpdate.lastName = lastName || userToUpdate.lastName || ''
@@ -99,7 +103,7 @@ export class UserResolver {
             return user
         } catch (e) {
             console.log(e.message)
-            return user
+            throw new TypeError()
         }
     }
 
