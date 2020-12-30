@@ -12,7 +12,7 @@
 		"deps:copy": "cpx '*{package.json,package-lock.json}' 'dist/functions' && cpx '.env.production' 'dist/functions'",
 		"deps:install": "cd 'dist/functions' && npm install",
 		"build:funcs-full": "npm run clean && npm run deps:copy && npm run deps:install && npm run build:funcs-prod",
-        "test": "jest src"
+		"test": "jest src"
 	},
 	"author": "Marc Arbesman <marc@ninozfantasysports.com>",
 	"license": "ISC",

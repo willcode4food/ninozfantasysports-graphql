@@ -3,9 +3,9 @@ import { Length, IsNotEmpty, IsIn } from 'class-validator'
 import { League } from '../../entites/League'
 
 @InputType()
-export class LeagueInput implements Partial<League> {
-    // @Field(() => ID)
-    // id: string
+export class LeagueUpdateInput implements Partial<League> {
+    @Field(() => ID)
+    id: string
 
     @Field()
     @Length(2, 255)

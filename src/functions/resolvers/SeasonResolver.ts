@@ -72,10 +72,10 @@ export class SeasonResolver {
             seasonToUpdate.leagueId = leagueId || seasonToUpdate.leagueId
             seasonToUpdate.dateUpdated = new Date()
             season = await SeasonRepository.update(seasonToUpdate)
+            return season
         } catch (e) {
             console.log(e.message)
-            return season
+            throw new TypeError()
         }
-        return season
     }
 }
