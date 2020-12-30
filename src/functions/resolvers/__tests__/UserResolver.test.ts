@@ -222,6 +222,7 @@ describe('User Resolver', () => {
             loginProvider: user.loginProvider,
         })
     })
+
     it('throws an error for a duplicate email when creating a new user', async () => {
         const { graphqlCall } = require('../../../test-utils/graphqlCall')
         const user = {

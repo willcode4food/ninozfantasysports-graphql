@@ -88,13 +88,13 @@ export class UserResolver {
                 console.log('UserId is invalid')
                 throw new TypeError('UserId is invalid')
             }
-            userToUpdate.email = email || userToUpdate.email || ''
-            userToUpdate.firstName = firstName || userToUpdate.firstName || ''
-            userToUpdate.lastName = lastName || userToUpdate.lastName || ''
+            userToUpdate.email = email
+            userToUpdate.firstName = firstName
+            userToUpdate.lastName = lastName
             userToUpdate.profileImageName = profileImageName || userToUpdate.profileImageName || ''
-            userToUpdate.loginProvider = loginProvider || userToUpdate.loginProvider || ''
+            userToUpdate.loginProvider = loginProvider
             userToUpdate.defaultAvatarThemeIndex = defaultAvatarThemeIndex || userToUpdate.defaultAvatarThemeIndex || 0
-            userToUpdate.username = username || ''
+            userToUpdate.username = username
             userToUpdate.city = city || userToUpdate.city || ''
             userToUpdate.state = state || userToUpdate.state || ''
             userToUpdate.zip = zip || userToUpdate.zip || ''
@@ -109,12 +109,7 @@ export class UserResolver {
 
     @Mutation(() => Boolean)
     async removeSingleUser(@Arg('id') id: string): Promise<boolean> {
-        try {
-            await UserRepository.delete(id)
-        } catch (e) {
-            console.log(e.message)
-            return false
-        }
+        await UserRepository.delete(id)
         return true
     }
 }

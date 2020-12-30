@@ -29,7 +29,7 @@ describe('User Entity Repository', () => {
         const { UserRepository } = require('../User')
         expect(UserRepository).toBeInstanceOf(BaseFirestoreRepository)
     })
-    it('has decorators that return correct types', () => {
+    it('has IDs that are the correct type', () => {
         const { returnId, returnInt } = require('../User')
         expect(returnId()).toBe(ID)
         expect(returnInt()).toBe(Int)
