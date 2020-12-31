@@ -1,5 +1,6 @@
 import { BaseFirestoreRepository } from 'fireorm'
 import { initialize } from 'fireorm/lib/src/MetadataStorage'
+import { ID, Int } from 'type-graphql'
 
 const MockFirebase = require('mock-cloud-firestore')
 const fixtureData = {
@@ -27,6 +28,11 @@ describe('User Entity Repository', () => {
     it('should be an instance of BaseRespository', () => {
         const { UserRepository } = require('../User')
         expect(UserRepository).toBeInstanceOf(BaseFirestoreRepository)
+    })
+    it('has IDs that are the correct type', () => {
+        const { returnId, returnInt } = require('../User')
+        expect(returnId()).toBe(ID)
+        expect(returnInt()).toBe(Int)
     })
     it('returns a user with first name, last name, username, and email for the given ID', async () => {
         const { UserRepository } = require('../User')

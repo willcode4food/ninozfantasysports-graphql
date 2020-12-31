@@ -3,7 +3,7 @@
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "baseUrl": "./src",
-        "outDir": "./dist/functions",
+        "outDir": "dist/functions",
         "sourceMap": true,
         "declaration": false,
         "composite": false,
@@ -20,6 +20,7 @@
         "experimentalDecorators": true,
         "skipLibCheck": true,
         "target": "es2016",
+        "removeComments": false,
         "strictNullChecks": true,
         "strictFunctionTypes": true,
         "strict": false,

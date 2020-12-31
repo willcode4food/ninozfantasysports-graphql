@@ -4,7 +4,7 @@ import { User } from '../../entites/User'
 import { IsNotUsernameAlreadyExists, IsNotEmailAlreadyExists } from '../decorators'
 
 @InputType()
-export class UserInput implements Partial<User> {
+export class UserUpdateInput implements Partial<User> {
     @Field(() => ID)
     id: string
 
@@ -15,7 +15,6 @@ export class UserInput implements Partial<User> {
     @Field({ nullable: false })
     @IsNotEmpty()
     @IsEmail()
-    @IsNotEmailAlreadyExists({ message: 'A user with that email address has already registered.' })
     email: string
 
     @Field({ nullable: false })

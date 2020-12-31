@@ -2,10 +2,14 @@ import { getRepository, Collection } from 'fireorm'
 import { ObjectType, Field, ID } from 'type-graphql'
 import { Season } from './Season'
 
+export const returnId = () => ID
+export const returnSeasons = () => [Season]
+
 @Collection('leagues')
 @ObjectType({ description: 'The Leagues model' })
 export class League {
-    @Field(() => ID)
+    // istanbul ignore next
+    @Field(returnId)
     id: string
 
     @Field()
@@ -23,7 +27,7 @@ export class League {
     @Field()
     type: string
 
-    @Field(() => [Season])
+    @Field(returnSeasons)
     seasons: Season[]
 }
 

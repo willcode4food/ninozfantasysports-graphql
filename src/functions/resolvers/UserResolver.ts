@@ -1,7 +1,9 @@
 import { Resolver, Mutation, Arg, Query } from 'type-graphql'
 import { User, UserRepository } from '../entites/User'
-import { UserInput } from './types'
-@Resolver((_of) => User)
+import { UserInput, UserUpdateInput } from './types'
+
+export const resolveUser = () => User
+@Resolver(resolveUser)
 export class UserResolver {
     @Query((_returns) => User, { nullable: false })
     async returnSingleUser(@Arg('id') id: string): Promise<User> {
@@ -16,7 +18,19 @@ export class UserResolver {
     @Mutation(() => User)
     async createUser(
         @Arg('data', { validate: true })
-        { id, username, email, firstName, lastName, profileImageName, city, state, zip }: UserInput
+        {
+            id,
+            username,
+            email,
+            firstName,
+            lastName,
+            profileImageName,
+            loginProvider,
+            defaultAvatarThemeIndex,
+            city,
+            state,
+            zip,
+        }: UserInput
     ): Promise<User> {
         const entity = new User()
         entity.id = id
@@ -25,6 +39,8 @@ export class UserResolver {
         entity.firstName = firstName
         entity.lastName = lastName
         entity.profileImageName = profileImageName
+        entity.loginProvider = loginProvider
+        entity.defaultAvatarThemeIndex = defaultAvatarThemeIndex
         entity.city = city
         entity.state = state
         entity.zip = zip
@@ -36,7 +52,19 @@ export class UserResolver {
     @Mutation(() => User)
     async updateUser(
         @Arg('data', { validate: true })
-        { id, username, email, firstName, lastName, profileImageName, city, state, zip }: UserInput
+        {
+            id,
+            email,
+            firstName,
+            lastName,
+            profileImageName,
+            city,
+            state,
+            username,
+            zip,
+            loginProvider,
+            defaultAvatarThemeIndex,
+        }: UserUpdateInput
     ): Promise<User> {
         let user: User = {
             id: '',
@@ -56,31 +84,32 @@ export class UserResolver {
 
         try {
             const userToUpdate = await UserRepository.findById(id)
-            userToUpdate.email = email || userToUpdate.email
-            userToUpdate.username = username || userToUpdate.username
-            userToUpdate.firstName = firstName || userToUpdate.firstName
-            userToUpdate.lastName = lastName || userToUpdate.lastName
-            userToUpdate.profileImageName = profileImageName || userToUpdate.profileImageName
-            userToUpdate.city = city || userToUpdate.city
-            userToUpdate.state = state || userToUpdate.state
-            userToUpdate.zip = zip || userToUpdate.zip
+            if (!userToUpdate) {
+                console.log('UserId is invalid')
+                throw new TypeError('UserId is invalid')
+            }
+            userToUpdate.email = email
+            userToUpdate.firstName = firstName
+            userToUpdate.lastName = lastName
+            userToUpdate.profileImageName = profileImageName || userToUpdate.profileImageName || ''
+            userToUpdate.loginProvider = loginProvider
+            userToUpdate.defaultAvatarThemeIndex = defaultAvatarThemeIndex || userToUpdate.defaultAvatarThemeIndex || 0
+            userToUpdate.username = username
+            userToUpdate.city = city || userToUpdate.city || ''
+            userToUpdate.state = state || userToUpdate.state || ''
+            userToUpdate.zip = zip || userToUpdate.zip || ''
             userToUpdate.dateUpdated = new Date()
             user = await UserRepository.update(userToUpdate)
             return user
         } catch (e) {
             console.log(e.message)
+            throw new TypeError()
         }
-        return user
     }
 
     @Mutation(() => Boolean)
     async removeSingleUser(@Arg('id') id: string): Promise<boolean> {
-        try {
-            await UserRepository.delete(id)
-        } catch (e) {
-            console.log(e.message)
-            return false
-        }
+        await UserRepository.delete(id)
         return true
     }
 }

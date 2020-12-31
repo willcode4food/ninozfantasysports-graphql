@@ -1,13 +1,15 @@
 import { getRepository, Collection } from 'fireorm'
 import { ObjectType, Field, ID } from 'type-graphql'
 
+export const returnId = () => ID
+
 @Collection('seasons')
 @ObjectType({ description: 'The Season model' })
 export class Season {
-    @Field(() => ID)
+    @Field(returnId)
     id: string
 
-    @Field(() => ID)
+    @Field(returnId)
     leagueId: string
 
     @Field()
