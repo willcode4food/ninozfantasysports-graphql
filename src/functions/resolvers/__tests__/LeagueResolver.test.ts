@@ -19,6 +19,20 @@ const fixtureData = {
                 },
             },
         },
+        seasons: {
+            __doc__: {
+                AAqVvYGHKX4ayl97qrfy: {
+                    id: 'AAqVvYGHKX4ayl97qrfy',
+                    leagueId: 'DDqVvYGHKX4ayl97qrfy',
+                    name: 'Season 1',
+                },
+                JJqVvYGHKX4ayl97qrfy: {
+                    id: 'JJqVvYGHKX4ayl97qrfy',
+                    leagueId: 'DDqVvYGHKX4ayl97qrfy',
+                    name: 'Season 2',
+                },
+            },
+        },
     },
 }
 

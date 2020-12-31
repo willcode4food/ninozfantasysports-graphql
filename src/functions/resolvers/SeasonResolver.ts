@@ -1,9 +1,11 @@
 import { League } from 'functions/entites/League'
 import { Mutation, Arg, Query, Resolver } from 'type-graphql'
 import { Season, SeasonRepository } from '../entites/Season'
-import { SeasonInput } from './types'
+import { SeasonInput, SeasonUpdateInput } from './types'
 
-@Resolver((_of) => Season)
+export const resolveSeason = () => Season
+
+@Resolver(resolveSeason)
 export class SeasonResolver {
     @Query(() => Season, { nullable: false })
     async returnSingleSeason(@Arg('id') id: string): Promise<Season> {
@@ -52,7 +54,7 @@ export class SeasonResolver {
 
     @Mutation(() => Season)
     async updateSeason(
-        @Arg('data', { validate: true }) { id, name, startDate, endDate, leagueId }: SeasonInput
+        @Arg('data', { validate: true }) { id, name, startDate, endDate, leagueId }: SeasonUpdateInput
     ): Promise<Season> {
         let season: Season = {
             id: '',
@@ -66,10 +68,14 @@ export class SeasonResolver {
 
         try {
             const seasonToUpdate = await SeasonRepository.findById(id)
-            seasonToUpdate.name = name || seasonToUpdate.name
-            seasonToUpdate.startDate = startDate || seasonToUpdate.startDate
-            seasonToUpdate.endDate = endDate || seasonToUpdate.endDate
-            seasonToUpdate.leagueId = leagueId || seasonToUpdate.leagueId
+            if (!seasonToUpdate) {
+                console.log('SeasonId is invalid')
+                throw new TypeError('SeasonId is invalid')
+            }
+            seasonToUpdate.name = name
+            seasonToUpdate.startDate = startDate
+            seasonToUpdate.endDate = endDate
+            seasonToUpdate.leagueId = leagueId
             seasonToUpdate.dateUpdated = new Date()
             season = await SeasonRepository.update(seasonToUpdate)
             return season
@@ -77,5 +83,10 @@ export class SeasonResolver {
             console.log(e.message)
             throw new TypeError()
         }
+    }
+    @Mutation(() => Boolean)
+    async removeSingleSeason(@Arg('id') id: string): Promise<boolean> {
+        await SeasonRepository.delete(id)
+        return true
     }
 }

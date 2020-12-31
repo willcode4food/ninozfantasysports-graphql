@@ -3,7 +3,10 @@ import { IsDate, Length, IsNotEmpty } from 'class-validator'
 import { Season } from '../../entites/Season'
 
 @InputType()
-export class SeasonInput implements Partial<Season> {
+export class SeasonUpdateInput implements Partial<Season> {
+    @Field(() => ID)
+    id: string
+
     @Field(() => ID)
     leagueId: string
 

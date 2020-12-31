@@ -82,12 +82,7 @@ export class LeagueResolver {
     }
     @Mutation(() => Boolean)
     async removeSingleLeague(@Arg('id') id: string): Promise<boolean> {
-        try {
-            await LeagueRepository.delete(id)
-        } catch (e) {
-            console.log(e.message)
-            return false
-        }
+        await LeagueRepository.delete(id)
         return true
     }
 }
