@@ -8,10 +8,6 @@ export class UserUpdateInput implements Partial<User> {
     @Field(() => ID)
     id: string
 
-    @Field(() => Int)
-    @IsIn([0, 1, 2, 3])
-    defaultAvatarThemeIndex: number
-
     @Field({ nullable: false })
     @IsNotEmpty()
     @IsEmail()
@@ -25,17 +21,11 @@ export class UserUpdateInput implements Partial<User> {
     @Length(2, 20)
     lastName: string
 
-    @Field({ nullable: false })
-    @IsNotEmpty()
-    @IsIn(['email', 'google'])
-    loginProvider: string
-
     @Field({ nullable: true })
     profileImageName: string
 
     @Field({ nullable: false })
     @Length(2, 255)
-    @IsNotUsernameAlreadyExists({ message: 'Sorry, the username, $value has been taken.' })
     username: string
 
     @Field({ nullable: true })

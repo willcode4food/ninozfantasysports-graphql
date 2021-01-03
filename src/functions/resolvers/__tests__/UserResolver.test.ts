@@ -11,6 +11,8 @@ const fixtureData = {
                     lastName: 'Simpson',
                     username: 'hsimpson',
                     email: 'hsimpson@springfieldpower.com',
+                    loginProvider: 'email',
+                    defaultAvatarThemeIndex: 0,
                 },
                 QUsewNSXhRJuoKZoqiqdgIDWHp2: {
                     id: 'QUsewNSXhRJuoKZoqiqdgIDWHp2',
@@ -18,6 +20,8 @@ const fixtureData = {
                     lastName: 'Simpson',
                     username: 'msimpson',
                     email: 'msimpson@springfield.net',
+                    loginProvider: 'google',
+                    defaultAvatarThemeIndex: 0,
                 },
             },
         },
@@ -139,8 +143,6 @@ describe('User Resolver', () => {
             lastName: 'Powell',
             email: 'hpowell@kompany.zone',
             username: 'hpowell',
-            defaultAvatarThemeIndex: 0,
-            loginProvider: 'email',
             profileImageName: '',
             city: '',
             state: '',
@@ -198,8 +200,6 @@ describe('User Resolver', () => {
             lastName: 'Powell',
             email: 'hpowell@kompany.zone',
             username: 'hpowell',
-            defaultAvatarThemeIndex: 0,
-            loginProvider: 'email',
             profileImageName: '',
             city: '',
             state: '',
@@ -218,8 +218,6 @@ describe('User Resolver', () => {
             lastName: user.lastName,
             email: user.email,
             username: user.username,
-            defaultAvatarThemeIndex: user.defaultAvatarThemeIndex,
-            loginProvider: user.loginProvider,
         })
     })
 
