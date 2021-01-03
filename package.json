@@ -1,6 +1,6 @@
 {
 	"name": "ninozfantasysports-graphql",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "GraphQL backend for ninozfantasysports",
 	"main": "index.js",
 	"scripts": {
