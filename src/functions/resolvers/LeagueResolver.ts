@@ -46,8 +46,7 @@ export class LeagueResolver {
             league = await LeagueRepository.create(entity)
             return league
         } catch (e) {
-            console.log(e.message)
-            throw new TypeError()
+            throw new Error(e.message)
         }
     }
     @Mutation(() => League)
@@ -66,8 +65,7 @@ export class LeagueResolver {
         try {
             const leagueToUpdate = await LeagueRepository.findById(id)
             if (!leagueToUpdate) {
-                console.log('LeagueId is invalid')
-                throw new TypeError('LeagueId is invalid')
+                throw new Error('LeagueId is invalid')
             }
             leagueToUpdate.name = name
             leagueToUpdate.ownerId = ownerId
@@ -76,13 +74,16 @@ export class LeagueResolver {
             league = await LeagueRepository.update(leagueToUpdate)
             return league
         } catch (e) {
-            console.log(e.message)
-            throw new TypeError()
+            throw new Error(e.message)
         }
     }
     @Mutation(() => Boolean)
-    async removeSingleLeague(@Arg('id') id: string): Promise<boolean> {
-        await LeagueRepository.delete(id)
-        return true
+    async removeSingleLeague(@Arg('id') id: string): Promise<Boolean> {
+        try {
+            await LeagueRepository.delete(id)
+            return true
+        } catch (e) {
+            throw new Error(e.message)
+        }
     }
 }

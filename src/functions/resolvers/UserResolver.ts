@@ -112,7 +112,11 @@ export class UserResolver {
 
     @Mutation(() => Boolean)
     async removeSingleUser(@Arg('id') id: string): Promise<boolean> {
-        await UserRepository.delete(id)
-        return true
+        try {
+            await UserRepository.delete(id)
+            return true
+        } catch (e) {
+            throw new Error(e.message)
+        }
     }
 }

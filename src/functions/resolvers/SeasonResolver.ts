@@ -45,8 +45,7 @@ export class SeasonResolver {
         try {
             season = await SeasonRepository.create(entity)
         } catch (e) {
-            console.log(e.message)
-            return season
+            throw new Error(e.message)
         }
 
         return season
@@ -69,8 +68,7 @@ export class SeasonResolver {
         try {
             const seasonToUpdate = await SeasonRepository.findById(id)
             if (!seasonToUpdate) {
-                console.log('SeasonId is invalid')
-                throw new TypeError('SeasonId is invalid')
+                throw new Error('SeasonId is invalid')
             }
             seasonToUpdate.name = name
             seasonToUpdate.startDate = startDate
@@ -80,13 +78,17 @@ export class SeasonResolver {
             season = await SeasonRepository.update(seasonToUpdate)
             return season
         } catch (e) {
-            console.log(e.message)
-            throw new TypeError()
+            throw new Error(e.message)
         }
     }
     @Mutation(() => Boolean)
     async removeSingleSeason(@Arg('id') id: string): Promise<boolean> {
-        await SeasonRepository.delete(id)
+        try {
+            await SeasonRepository.delete(id)
+        } catch (e) {
+            throw new Error(e.message)
+        }
+
         return true
     }
 }
