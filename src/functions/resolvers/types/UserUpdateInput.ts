@@ -1,7 +1,6 @@
-import { InputType, Field, ID, Int } from 'type-graphql'
-import { Length, IsEmail, IsNotEmpty, IsIn } from 'class-validator'
+import { IsEmail, IsNotEmpty, Length } from 'class-validator'
+import { Field, ID, InputType } from 'type-graphql'
 import { User } from '../../entites/User'
-import { IsNotUsernameAlreadyExists, IsNotEmailAlreadyExists } from '../decorators'
 
 @InputType()
 export class UserUpdateInput implements Partial<User> {
