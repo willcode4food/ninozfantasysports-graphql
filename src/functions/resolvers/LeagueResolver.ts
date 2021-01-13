@@ -25,12 +25,15 @@ export class LeagueResolver {
     }
 
     @Mutation(() => League)
-    async createLeague(@Arg('data', { validate: true }) { name, ownerId, type }: LeagueInput): Promise<League> {
+    async createLeague(
+        @Arg('data', { validate: true }) { description, name, ownerId, type }: LeagueInput
+    ): Promise<League> {
         let league: League = {
             id: '',
             name: '',
             ownerId: '',
             type: '',
+            description: '',
             dateCreated: new Date(),
             dateUpdated: new Date(),
             seasons: [],
@@ -41,6 +44,7 @@ export class LeagueResolver {
             entity.name = name
             entity.ownerId = ownerId
             entity.type = type
+            entity.description = description
             entity.dateCreated = new Date()
             entity.dateUpdated = new Date()
             league = await LeagueRepository.create(entity)
@@ -51,13 +55,14 @@ export class LeagueResolver {
     }
     @Mutation(() => League)
     async updateLeague(
-        @Arg('data', { validate: true }) { id, name, ownerId, type }: LeagueUpdateInput
+        @Arg('data', { validate: true }) { id, description, name, ownerId, type }: LeagueUpdateInput
     ): Promise<League> {
         let league: League = {
             id: '',
             name: '',
             ownerId: '',
             type: '',
+            description: '',
             dateCreated: new Date(),
             dateUpdated: new Date(),
             seasons: [],
@@ -68,6 +73,7 @@ export class LeagueResolver {
                 throw new Error('LeagueId is invalid')
             }
             leagueToUpdate.name = name
+            leagueToUpdate.description = description
             leagueToUpdate.ownerId = ownerId
             leagueToUpdate.type = type
             leagueToUpdate.dateUpdated = new Date()

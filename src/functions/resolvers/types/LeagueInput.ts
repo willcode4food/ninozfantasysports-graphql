@@ -10,6 +10,9 @@ export class LeagueInput implements Partial<League> {
     name: string
 
     @Field()
+    description: string
+
+    @Field()
     @IsNotEmpty()
     ownerId: string
 
