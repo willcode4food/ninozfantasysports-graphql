@@ -19,6 +19,9 @@ export class League {
     dateUpdated: Date
 
     @Field()
+    description: string
+
+    @Field()
     name: string
 
     @Field()

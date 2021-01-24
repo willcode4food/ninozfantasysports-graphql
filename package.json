@@ -1,6 +1,6 @@
 {
 	"name": "ninozfantasysports-graphql",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "GraphQL backend for ninozfantasysports",
 	"main": "index.js",
 	"scripts": {
@@ -30,9 +30,11 @@
 	},
 	"dependencies": {
 		"@types/firebase": "^3.2.1",
-		"apollo-server-cloud-functions": "^2.19.0",
+		"apollo-server-express": "^2.19.2",
 		"class-validator": "^0.12.2",
+		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
 		"firebase-admin": "^9.3.0",
 		"firebase-functions": "^3.11.0",
 		"fireorm": "^0.17.2",
