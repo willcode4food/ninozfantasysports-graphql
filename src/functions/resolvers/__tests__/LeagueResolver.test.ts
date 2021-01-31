@@ -15,7 +15,7 @@ const fixtureData = {
                         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
                         culpa qui officia deserunt mollit anim id est laborum."`,
                     name: 'Conflict of Enemies 2021',
-                    ownerId: '123Nm7DPdpInAy6sRCxL',
+                    ownerId: 'a123Nm7DPdpInAy6sRCxL',
                     type: 'esports',
                 },
                 DDqVvYGHKX4ayl97qrfy: {
@@ -28,7 +28,7 @@ const fixtureData = {
                         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
                         culpa qui officia deserunt mollit anim id est laborum."`,
                     name: 'Conflict of Enemies 2020',
-                    ownerId: '123Nm7DPdpInAy6sRCxL',
+                    ownerId: 'a123Nm7DPdpInAy6sRCxL',
                     type: 'esports',
                 },
             },
@@ -44,6 +44,14 @@ const fixtureData = {
                     id: 'JJqVvYGHKX4ayl97qrfy',
                     leagueId: 'DDqVvYGHKX4ayl97qrfy',
                     name: 'Season 2',
+                },
+            },
+        },
+        users: {
+            __doc__: {
+                a123Nm7DPdpInAy6sRCxL: {
+                    id: 'a123Nm7DPdpInAy6sRCxL',
+                    username: 'elbarto',
                 },
             },
         },

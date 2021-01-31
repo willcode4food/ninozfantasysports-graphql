@@ -18,7 +18,7 @@ interface AuthRequest extends Request {
  */
 export async function authMiddleware(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     let firebaseAdminAuth = admin.auth()
-    if (process.env.NODE_ENV !== 'development') {
+    if (process.env.NODE_ENV === 'development') {
         return next()
     }
     if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {

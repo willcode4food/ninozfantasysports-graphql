@@ -28,6 +28,9 @@ export class League {
     ownerId: string
 
     @Field()
+    ownerName: string
+
+    @Field()
     type: string
 
     @Field(returnSeasons)
