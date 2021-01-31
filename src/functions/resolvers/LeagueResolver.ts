@@ -20,7 +20,7 @@ export class LeagueResolver {
     @Query(() => [League])
     async returnAllLeagues(): Promise<League[]> {
         const allLeagues = await LeagueRepository.find()
-        const allSeasons = await SeasonRepository.find()
+        const allSeasons = await SeasonRepository.orderByAscending('startDate').find()
         const allUsers = await UserRepository.find()
         return allLeagues.map((league) => {
             const seasons = allSeasons.filter((season) => league.id === season.leagueId)
