@@ -4,7 +4,7 @@ import {
     ValidatorConstraint,
     ValidatorConstraintInterface,
 } from 'class-validator'
-import { UserRepository } from '@entities/User'
+import { UserRepository } from '../../entities/User'
 
 @ValidatorConstraint({ async: true })
 export class IsNotUsernameAlreadyExistsConstraint implements ValidatorConstraintInterface {
