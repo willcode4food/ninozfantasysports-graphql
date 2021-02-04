@@ -1,7 +1,7 @@
-import { User, UserRepository } from '../entites/User'
+import { User, UserRepository } from '../entities/User'
 import { Resolver, Mutation, Arg, Query } from 'type-graphql'
-import { League, LeagueRepository } from '../entites/League'
-import { Season, SeasonRepository } from '../entites/Season'
+import { League, LeagueRepository } from '../entities/League'
+import { Season, SeasonRepository } from '../entities/Season'
 import { LeagueInput, LeagueUpdateInput } from './types'
 
 export const resolveLeague = () => League

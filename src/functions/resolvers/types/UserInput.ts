@@ -1,6 +1,6 @@
 import { InputType, Field, ID, Int } from 'type-graphql'
 import { Length, IsEmail, IsNotEmpty, IsIn } from 'class-validator'
-import { User } from '../../entites/User'
+import { User } from '../../entities/User'
 import { IsNotUsernameAlreadyExists, IsNotEmailAlreadyExists } from '../decorators'
 
 @InputType()

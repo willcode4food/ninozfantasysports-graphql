@@ -2,7 +2,6 @@
     "compileOnSave": true,
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
-        "baseUrl": "./src",
         "outDir": "dist/functions",
         "sourceMap": true,
         "declaration": false,

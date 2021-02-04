@@ -1,6 +1,6 @@
-import { League } from 'functions/entites/League'
+import { League } from '@entities/League'
 import { Mutation, Arg, Query, Resolver } from 'type-graphql'
-import { Season, SeasonRepository } from '../entites/Season'
+import { Season, SeasonRepository } from '../entities/Season'
 import { SeasonInput, SeasonUpdateInput } from './types'
 
 export const resolveSeason = () => Season

@@ -136,7 +136,7 @@ describe('League Resolver', () => {
     })
     it('is a resolver of type League', () => {
         const { resolveLeague } = require('../LeagueResolver')
-        const { League } = require('../../entites/League')
+        const { League } = require('../../entities/League')
         expect(resolveLeague()).toBe(League)
     })
     it('removes a league', async () => {

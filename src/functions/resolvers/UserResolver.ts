@@ -1,5 +1,5 @@
 import { Resolver, Mutation, Arg, Query } from 'type-graphql'
-import { User, UserRepository } from '../entites/User'
+import { User, UserRepository } from '../entities/User'
 import { UserInput, UserUpdateInput } from './types'
 
 export const resolveUser = () => User

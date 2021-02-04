@@ -124,7 +124,7 @@ describe('Season Resolver', () => {
     })
     it('is a resolver of type Season', () => {
         const { resolveSeason } = require('../SeasonResolver')
-        const { Season } = require('../../entites/Season')
+        const { Season } = require('../../entities/Season')
         expect(resolveSeason()).toBe(Season)
     })
 

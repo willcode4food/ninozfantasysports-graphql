@@ -1,6 +1,5 @@
 import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
-// import { Storage } from '@google-cloud/storage'
 require('dotenv')
 import * as fireorm from 'fireorm'
 
@@ -17,7 +16,6 @@ export function initialize() {
 
     const firestore = admin.firestore()
     const settings = { timestampsInSnapshots: true, ignoreUndefinedProperties: true }
-    // const storageBucket = process.env.STORAGEBUCKET
 
     firestore.settings(settings)
     fireorm.initialize(firestore)

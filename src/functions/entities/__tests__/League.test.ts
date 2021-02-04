@@ -1,6 +1,7 @@
 import { BaseFirestoreRepository } from 'fireorm'
 import { initialize } from 'fireorm/lib/src/MetadataStorage'
 import { ID } from 'type-graphql'
+import { LeagueRepository } from '../League'
 
 const MockFirebase = require('mock-cloud-firestore')
 const expectedLeagueId = 'BQzNm7DPdpInAy6sRCxL'
@@ -30,7 +31,7 @@ describe('League Entity Repository', () => {
         initialize(firestore)
     })
     it('should be an instance of BaseRespository', () => {
-        const { LeagueRepository } = require('../League')
+        // const { LeagueRepository } = require('../League')
         expect(LeagueRepository).toBeInstanceOf(BaseFirestoreRepository)
     })
     it('has decorators that return correct types', () => {
