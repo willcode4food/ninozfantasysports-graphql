@@ -36,7 +36,7 @@ describe('User Resolver', () => {
     })
 
     const createUserMutation = `
-        mutation CreateUser($data:UserInput!) {
+        mutation CreateUser($data:UserInputType!) {
             createUser(data: $data) {
                 firstName
                 lastName
@@ -49,7 +49,7 @@ describe('User Resolver', () => {
         }
     `
     const updateUserMutation = `
-        mutation UpdateUser($data: UserUpdateInput!) {
+        mutation UpdateUser($data: UserUpdateInputType!) {
             updateUser(data: $data) {
                 firstName
                 lastName
@@ -86,7 +86,7 @@ describe('User Resolver', () => {
     `
 
     it('returns correct number of records from querying all', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
 
         const response = await graphqlCall({
             source: getAllUsersQuery,
@@ -94,7 +94,7 @@ describe('User Resolver', () => {
         expect(response.data.returnAllUsers.length).toBe(2)
     })
     it('returns the correct user when their id is provided', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
 
         const response = await graphqlCall({
             source: getUserByIdQuery,
@@ -107,11 +107,11 @@ describe('User Resolver', () => {
     })
     it('is a resolver of type User', () => {
         const { resolveUser } = require('../UserResolver')
-        const { User } = require('../../entities/User')
+        const { User } = require('../UserEntity')
         expect(resolveUser()).toBe(User)
     })
     it('removes a user', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
 
         const responseBefore = await graphqlCall({
             source: getAllUsersQuery,
@@ -135,7 +135,7 @@ describe('User Resolver', () => {
     })
 
     it('throws an error if invalid ID when updating a user', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const userId = '111AUsewddNSXhRJuoKZoqiqdgIDWHp2'
         const user = {
             id: userId,
@@ -160,7 +160,7 @@ describe('User Resolver', () => {
     })
     it('creates a user', async () => {
         // graphql
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const user = {
             id: 'sdfasdfasdf',
             firstName: 'lisa',
@@ -192,7 +192,7 @@ describe('User Resolver', () => {
     })
 
     it('updates a user', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const userId = 'AUsewNSXhRJuoKZoqiqdgIDWHp2'
         const user = {
             id: userId,
@@ -222,7 +222,7 @@ describe('User Resolver', () => {
     })
 
     it('throws an error for a duplicate email when creating a new user', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const user = {
             id: 'sdfasdfasdf',
             firstName: 'homer',
@@ -246,7 +246,7 @@ describe('User Resolver', () => {
     })
 
     it('throws an error for a duplicate username when creating a new user', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const user = {
             id: 'sdfasdfasdf',
             firstName: 'homer',

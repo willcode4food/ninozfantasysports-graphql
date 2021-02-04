@@ -1,10 +1,10 @@
 import { InputType, Field, ID, Int } from 'type-graphql'
 import { Length, IsEmail, IsNotEmpty, IsIn } from 'class-validator'
-import { User } from '../../entities/User'
-import { IsNotUsernameAlreadyExists, IsNotEmailAlreadyExists } from '../decorators'
+import { User } from './UserEntity'
+import { IsNotUsernameAlreadyExists, IsNotEmailAlreadyExists } from '../../resolvers/decorators'
 
 @InputType()
-export class UserInput implements Partial<User> {
+export class UserInputType implements Partial<User> {
     @Field(() => ID)
     id: string
 

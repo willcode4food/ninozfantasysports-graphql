@@ -9,7 +9,7 @@ import { authMiddleware, MiddleWareFn } from './middleware/authMiddleware'
 require('dotenv')
 
 initialize()
-import { UserResolver } from './resolvers/UserResolver'
+import { UserResolver } from './features/Users/UserResolver'
 import { LeagueResolver } from './resolvers/LeagueResolver'
 import { SeasonResolver } from './resolvers/SeasonResolver'
 

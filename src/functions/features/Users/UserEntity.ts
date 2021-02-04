@@ -49,4 +49,4 @@ export class User {
     zip: string
 }
 
-export const UserRepository = getRepository(User)
+export const UserEntityRepository = getRepository(User)

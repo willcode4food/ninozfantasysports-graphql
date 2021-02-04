@@ -4,12 +4,12 @@ import {
     ValidatorConstraint,
     ValidatorConstraintInterface,
 } from 'class-validator'
-import { UserRepository } from '../../entities/User'
+import { UserEntityRepository } from '../../features/Users/UserEntity'
 
 @ValidatorConstraint({ async: true })
 export class IsNotEmailAlreadyExistsConstraint implements ValidatorConstraintInterface {
     validate(email: string) {
-        return UserRepository.whereEqualTo('email', email)
+        return UserEntityRepository.whereEqualTo('email', email)
             .findOne()
             .then((user) => {
                 if (user) return false

@@ -1,4 +1,4 @@
-import { User, UserRepository } from '../entities/User'
+import { User, UserEntityRepository } from '../features/Users/UserEntity'
 import { Resolver, Mutation, Arg, Query } from 'type-graphql'
 import { League, LeagueRepository } from '../entities/League'
 import { Season, SeasonRepository } from '../entities/Season'
@@ -11,7 +11,7 @@ export class LeagueResolver {
     @Query((_returns) => League, { nullable: false })
     async returnSingleLeague(@Arg('id') id: string): Promise<League> {
         const league = await LeagueRepository.findById(id)
-        const owner = await UserRepository.findById(league.ownerId)
+        const owner = await UserEntityRepository.findById(league.ownerId)
         const seasons = await SeasonRepository.whereEqualTo('leagueId', league.id).find()
         const ownerName = owner.username
         return { ...league, seasons, ownerName }
@@ -21,7 +21,7 @@ export class LeagueResolver {
     async returnAllLeagues(): Promise<League[]> {
         const allLeagues = await LeagueRepository.find()
         const allSeasons = await SeasonRepository.orderByAscending('startDate').find()
-        const allUsers = await UserRepository.find()
+        const allUsers = await UserEntityRepository.find()
         return allLeagues.map((league) => {
             const seasons = allSeasons.filter((season) => league.id === season.leagueId)
             const ownerRecord = allUsers.filter((user) => user.id === league.ownerId)[0]
