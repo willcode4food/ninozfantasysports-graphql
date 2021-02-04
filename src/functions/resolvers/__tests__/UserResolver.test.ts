@@ -107,7 +107,7 @@ describe('User Resolver', () => {
     })
     it('is a resolver of type User', () => {
         const { resolveUser } = require('../UserResolver')
-        const { User } = require('../../entites/User')
+        const { User } = require('../../entities/User')
         expect(resolveUser()).toBe(User)
     })
     it('removes a user', async () => {
