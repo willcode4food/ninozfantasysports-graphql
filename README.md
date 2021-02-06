@@ -21,3 +21,5 @@ _(Assumes you have a Firebase Account Created)_
 
 4. In another terminal window run the firebase dev server  
     `npm run serve `
+
+Check out https://github.com/erikras/ducks-modular-redux

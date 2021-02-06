@@ -1,8 +1,8 @@
 import { League } from '../Leagues/LeagueEntity'
 import { Mutation, Arg, Query, Resolver } from 'type-graphql'
 import { Season, SeasonRepository } from './SeasonEntity'
-import SeasonInputType from './SeasonInputType'
-import SeasonUpdateInputType from './SeasonUpdateInputType'
+import SeasonInputType from './types/SeasonInputType'
+import SeasonUpdateInputType from './types/SeasonUpdateInputType'
 
 export const resolveSeason = () => Season
 
