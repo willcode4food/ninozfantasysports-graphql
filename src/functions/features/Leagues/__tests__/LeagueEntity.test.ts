@@ -1,7 +1,7 @@
 import { BaseFirestoreRepository } from 'fireorm'
 import { initialize } from 'fireorm/lib/src/MetadataStorage'
 import { ID } from 'type-graphql'
-import { LeagueRepository } from '../League'
+// import { LeagueRepository } from '../LeagueEntity'
 
 const MockFirebase = require('mock-cloud-firestore')
 const expectedLeagueId = 'BQzNm7DPdpInAy6sRCxL'
@@ -31,17 +31,17 @@ describe('League Entity Repository', () => {
         initialize(firestore)
     })
     it('should be an instance of BaseRespository', () => {
-        // const { LeagueRepository } = require('../League')
+        const { LeagueRepository } = require('../LeagueEntity')
         expect(LeagueRepository).toBeInstanceOf(BaseFirestoreRepository)
     })
     it('has decorators that return correct types', () => {
-        const { returnId, returnSeasons } = require('../League')
-        const { Season } = require('../Season')
+        const { returnId, returnSeasons } = require('../LeagueEntity')
+        const { Season } = require('../../Seasons/SeasonEntity')
         expect(returnId()).toBe(ID)
         expect(returnSeasons()).toMatchObject([Season])
     })
     it('returns a league with name, ownerId and type for a given id', async () => {
-        const { LeagueRepository } = require('../League')
+        const { LeagueRepository } = require('../LeagueEntity')
         const league = await LeagueRepository.findById(expectedLeagueId)
         expect(league.id).toBe(expectedLeagueId)
         expect(league.name).toBe(expectedLeagueName)
@@ -49,7 +49,7 @@ describe('League Entity Repository', () => {
         expect(league.type).toBe(expectedLeagueType)
     })
     it('creates a new league', async () => {
-        const { League, LeagueRepository } = require('../League')
+        const { League, LeagueRepository } = require('../LeagueEntity')
         const entity = new League()
         const expectedNewLeagueId = 'OoUsewNSXhRJuoKZoqiqdgIDWHp2'
         entity.id = expectedNewLeagueId
@@ -65,7 +65,7 @@ describe('League Entity Repository', () => {
         expect(league.type).toBe(expectedLeagueType)
     })
     it('will udpate a league with the correct data', async () => {
-        const { LeagueRepository } = require('../League')
+        const { LeagueRepository } = require('../LeagueEntity')
         const expectedUpdatedOwnerId = '232sewNSXhRJuoKZoqiqdgIDWHp2'
         const leagueToUpdate = await LeagueRepository.findById(expectedLeagueId)
         expect(leagueToUpdate.ownerId).toBe(expectedOwnerId)

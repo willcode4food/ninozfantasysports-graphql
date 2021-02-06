@@ -66,7 +66,7 @@ describe('League Resolver', () => {
     })
 
     const createLeagueMutation = `
-        mutation CreateLeague($data:LeagueInput!) {
+        mutation CreateLeague($data:LeagueInputType!) {
             createLeague(data: $data) {
                 id
                 description
@@ -77,7 +77,7 @@ describe('League Resolver', () => {
         }
     `
     const updateLeagueMutation = `
-        mutation UpdateLeague($data: LeagueUpdateInput!) {
+        mutation UpdateLeague($data: LeagueUpdateInputType!) {
             updateLeague(data: $data) {
                 id
                 description
@@ -115,7 +115,7 @@ describe('League Resolver', () => {
     `
 
     it('returns correct number of records from querying all', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
 
         const response = await graphqlCall({
             source: getAllLeaguesQuery,
@@ -123,7 +123,7 @@ describe('League Resolver', () => {
         expect(response.data.returnAllLeagues.length).toBe(2)
     })
     it('returns the correct league when their id is provided', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
 
         const response = await graphqlCall({
             source: getLeagueByIdQuery,
@@ -136,11 +136,11 @@ describe('League Resolver', () => {
     })
     it('is a resolver of type League', () => {
         const { resolveLeague } = require('../LeagueResolver')
-        const { League } = require('../../entities/League')
+        const { League } = require('../LeagueEntity')
         expect(resolveLeague()).toBe(League)
     })
     it('removes a league', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
 
         const responseBefore = await graphqlCall({
             source: getAllLeaguesQuery,
@@ -164,7 +164,7 @@ describe('League Resolver', () => {
     })
 
     it('throws an error if invalid ID when updating a league', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const leagueId = '111AUsewddNSXhRJuoKZoqiqdgIDWHp2'
         const league = {
             id: leagueId,
@@ -196,7 +196,7 @@ describe('League Resolver', () => {
     })
     it('creates a league', async () => {
         // graphql
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const league = {
             description: `At vero eos et accusamus et iusto odio dignissimos
                 ducimus qui blanditiis praesentium voluptatum deleniti atque 
@@ -229,7 +229,7 @@ describe('League Resolver', () => {
     })
 
     it('updates a league', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const leagueId = 'BQzNm7DPdpInAy6sRCxL'
         const league = {
             id: leagueId,

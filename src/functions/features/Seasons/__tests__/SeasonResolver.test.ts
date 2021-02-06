@@ -48,7 +48,7 @@ describe('Season Resolver', () => {
     })
 
     const createSeasonMutation = `
-        mutation CreateSeason($data:SeasonInput!) {
+        mutation CreateSeason($data:SeasonInputType!) {
             createSeason(data: $data) {
                 id
                 name
@@ -57,7 +57,7 @@ describe('Season Resolver', () => {
         }
     `
     const updateSeasonMutation = `
-        mutation UpdateSeason($data: SeasonUpdateInput!) {
+        mutation UpdateSeason($data: SeasonUpdateInputType!) {
             updateSeason(data: $data) {
                 id
                 name
@@ -103,7 +103,7 @@ describe('Season Resolver', () => {
     `
 
     it('returns correct number of records from querying all', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
 
         const response = await graphqlCall({
             source: getAllSeasonsQuery,
@@ -111,7 +111,7 @@ describe('Season Resolver', () => {
         expect(response.data.returnAllSeasons.length).toBe(2)
     })
     it('returns the correct season when their id is provided', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
 
         const response = await graphqlCall({
             source: getSeasonByIdQuery,
@@ -124,12 +124,12 @@ describe('Season Resolver', () => {
     })
     it('is a resolver of type Season', () => {
         const { resolveSeason } = require('../SeasonResolver')
-        const { Season } = require('../../entities/Season')
+        const { Season } = require('../SeasonEntity')
         expect(resolveSeason()).toBe(Season)
     })
 
     it('throws an error if invalid ID when updating a season', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const seasonId = 'asfasdfasdf'
         const season = {
             id: seasonId,
@@ -149,7 +149,7 @@ describe('Season Resolver', () => {
     })
     it('creates a season', async () => {
         // graphql
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const season = {
             leagueId: 'BQzNm7DPdpInAy6sRCxL',
             name: 'Season 4',
@@ -169,7 +169,7 @@ describe('Season Resolver', () => {
     })
 
     it('updates a season', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const seasonId = 'JJqVvYGHKX4ayl97qrfy'
         const season = {
             id: seasonId,
@@ -195,7 +195,7 @@ describe('Season Resolver', () => {
     })
 
     it('removes a season', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
 
         const responseBefore = await graphqlCall({
             source: getAllSeasonsQuery,
@@ -219,7 +219,7 @@ describe('Season Resolver', () => {
     })
 
     it('returns seasons based on a league id', async () => {
-        const { graphqlCall } = require('../../../test-utils/graphqlCall')
+        const { graphqlCall } = require('../../../../test-utils/graphqlCall')
 
         const response = await graphqlCall({
             source: getSeasonByLeagueIdQuery,

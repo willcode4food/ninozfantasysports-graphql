@@ -1,9 +1,9 @@
 import { InputType, Field, ID } from 'type-graphql'
 import { Length, IsNotEmpty, IsIn } from 'class-validator'
-import { League } from '../../entities/League'
+import { League } from './LeagueEntity'
 
 @InputType()
-export class LeagueUpdateInput implements Partial<League> {
+export default class LeagueUpdateInputType implements Partial<League> {
     @Field(() => ID)
     id: string
 

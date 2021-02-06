@@ -31,16 +31,16 @@ describe('Season Entity Repository', () => {
         initialize(firestore)
     })
     it('should be an instance of BaseRespository', () => {
-        const { SeasonRepository } = require('../Season')
+        const { SeasonRepository } = require('../SeasonEntity')
         expect(SeasonRepository).toBeInstanceOf(BaseFirestoreRepository)
     })
 
     it('has decorators that return correct types', () => {
-        const { returnId } = require('../Season')
+        const { returnId } = require('../SeasonEntity')
         expect(returnId()).toBe(ID)
     })
     it('returns a season with name, start date and end date for the given ID', async () => {
-        const { SeasonRepository } = require('../Season')
+        const { SeasonRepository } = require('../SeasonEntity')
         const Season = await SeasonRepository.findById(seasonId)
         expect(Season.id).toBe(seasonId)
         expect(Season.name).toBe(seasonName)
@@ -49,7 +49,7 @@ describe('Season Entity Repository', () => {
         expect(Season.endDate.toString()).toBe(endDate.toString())
     })
     it('will create a new season', async () => {
-        const { SeasonRepository, Season } = require('../Season')
+        const { SeasonRepository, Season } = require('../SeasonEntity')
         const expectedId = 'OoUsewNSXhRJuoKZoqiqdgIDWHp2'
         const expectedSeasonName = 'Season 2'
         const expectedStartDate = new Date('2020-01-17T03:24:00')
@@ -71,7 +71,7 @@ describe('Season Entity Repository', () => {
         expect(season.leagueId).toBe(expectedLeagueId)
     })
     it('will update a season with the correct data', async () => {
-        const { SeasonRepository } = require('../Season')
+        const { SeasonRepository } = require('../SeasonEntity')
         const expectedEndDate = new Date('2020-12-04T03:24:00')
         const seasonToUpdate = await SeasonRepository.findById(seasonId)
         expect(seasonToUpdate.endDate.toString()).toBe(endDate.toString())

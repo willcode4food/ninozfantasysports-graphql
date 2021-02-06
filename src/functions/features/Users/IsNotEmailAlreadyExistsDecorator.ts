@@ -4,12 +4,12 @@ import {
     ValidatorConstraint,
     ValidatorConstraintInterface,
 } from 'class-validator'
-import { UserRepository } from '../../entities/User'
+import { UserEntityRepository } from './UserEntity'
 
 @ValidatorConstraint({ async: true })
-export class IsNotUsernameAlreadyExistsConstraint implements ValidatorConstraintInterface {
-    validate(username: string) {
-        return UserRepository.whereEqualTo('username', username)
+export class IsNotEmailAlreadyExistsConstraint implements ValidatorConstraintInterface {
+    validate(email: string) {
+        return UserEntityRepository.whereEqualTo('email', email)
             .findOne()
             .then((user) => {
                 if (user) return false
@@ -17,9 +17,8 @@ export class IsNotUsernameAlreadyExistsConstraint implements ValidatorConstraint
             })
     }
 }
-
 // istanbul ignore next
-export function IsNotUsernameAlreadyExists(validationOptions?: ValidationOptions) {
+export default function IsNotEmailAlreadyExistsDecorator(validationOptions?: ValidationOptions) {
     // istanbul ignore next
     return function (object: Object, propertyName: string) {
         registerDecorator({
@@ -27,7 +26,7 @@ export function IsNotUsernameAlreadyExists(validationOptions?: ValidationOptions
             propertyName: propertyName,
             options: validationOptions,
             constraints: [],
-            validator: IsNotUsernameAlreadyExistsConstraint,
+            validator: IsNotEmailAlreadyExistsConstraint,
         })
     }
 }
