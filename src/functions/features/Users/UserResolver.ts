@@ -1,6 +1,7 @@
 import { Resolver, Mutation, Arg, Query } from 'type-graphql'
 import { User, UserEntityRepository } from './UserEntity'
-import { UserInput, UserUpdateInput } from '../../resolvers/types'
+import UserInputType from './UserInputType'
+import UserUpdateInputType from './UserUpdateInputType'
 
 export const resolveUser = () => User
 @Resolver(resolveUser)
@@ -39,7 +40,7 @@ export class UserResolver {
             city,
             state,
             zip,
-        }: UserInput
+        }: UserInputType
     ): Promise<User> {
         const entity = new User()
         entity.id = id
@@ -62,7 +63,7 @@ export class UserResolver {
     @Mutation(() => User)
     async updateUser(
         @Arg('data', { validate: true })
-        { id, email, firstName, lastName, profileImageName, city, state, username, zip }: UserUpdateInput
+        { id, email, firstName, lastName, profileImageName, city, state, username, zip }: UserUpdateInputType
     ): Promise<User> {
         let user: User = {
             id: '',

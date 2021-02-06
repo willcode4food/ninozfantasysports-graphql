@@ -1,8 +1,9 @@
-import { User, UserEntityRepository } from '../features/Users/UserEntity'
+import { UserEntityRepository } from '../Users/UserEntity'
 import { Resolver, Mutation, Arg, Query } from 'type-graphql'
-import { League, LeagueRepository } from '../entities/League'
-import { Season, SeasonRepository } from '../entities/Season'
-import { LeagueInput, LeagueUpdateInput } from './types'
+import { League, LeagueRepository } from './LeagueEntity'
+import { SeasonRepository } from '../Seasons/SeasonEntity'
+import LeagueInputType from '../Leagues/LeagueInputType'
+import LeagueUpdateInput from '../Leagues/LeagueUpdateInputType'
 
 export const resolveLeague = () => League
 
@@ -32,7 +33,7 @@ export class LeagueResolver {
 
     @Mutation(() => League)
     async createLeague(
-        @Arg('data', { validate: true }) { description, name, ownerId, type }: LeagueInput
+        @Arg('data', { validate: true }) { description, name, ownerId, type }: LeagueInputType
     ): Promise<League> {
         let league: League = {
             id: '',

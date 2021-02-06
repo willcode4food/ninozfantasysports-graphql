@@ -2,8 +2,8 @@ import { graphql } from 'graphql'
 import { buildSchemaSync } from 'type-graphql'
 import { Maybe } from 'graphql/jsutils/Maybe'
 import { UserResolver } from '../functions/features/Users/UserResolver'
-import { LeagueResolver } from '../functions/resolvers/LeagueResolver'
-import { SeasonResolver } from '../functions/resolvers/SeasonResolver'
+import { LeagueResolver } from '../functions/features/Leagues/LeagueResolver'
+import { SeasonResolver } from '../functions/features/Seasons/SeasonResolver'
 require('dotenv')
 
 interface Options {

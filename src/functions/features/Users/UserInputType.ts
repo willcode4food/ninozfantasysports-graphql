@@ -1,10 +1,11 @@
 import { InputType, Field, ID, Int } from 'type-graphql'
 import { Length, IsEmail, IsNotEmpty, IsIn } from 'class-validator'
 import { User } from './UserEntity'
-import { IsNotUsernameAlreadyExists, IsNotEmailAlreadyExists } from '../../resolvers/decorators'
-
+// import { IsNotUsernameAlreadyExists, IsNotEmailAlreadyExistsDecorator } from '../../resolvers/decorators'
+import IsNotEmailAlreadyExistsDecorator from './IsNotEmailAlreadyExistsDecorator'
+import IsNotUsernameAlreadyExistsDecorator from './IsNotUsernameAlreadyExistsDecorator'
 @InputType()
-export class UserInputType implements Partial<User> {
+export default class UserInputType implements Partial<User> {
     @Field(() => ID)
     id: string
 
@@ -15,7 +16,7 @@ export class UserInputType implements Partial<User> {
     @Field({ nullable: false })
     @IsNotEmpty()
     @IsEmail()
-    @IsNotEmailAlreadyExists({ message: 'A user with that email address has already registered.' })
+    @IsNotEmailAlreadyExistsDecorator({ message: 'A user with that email address has already registered.' })
     email: string
 
     @Field({ nullable: false })
@@ -36,7 +37,7 @@ export class UserInputType implements Partial<User> {
 
     @Field({ nullable: false })
     @Length(2, 255)
-    @IsNotUsernameAlreadyExists({ message: 'Sorry, the username, $value has been taken.' })
+    @IsNotUsernameAlreadyExistsDecorator({ message: 'Sorry, the username, $value has been taken.' })
     username: string
 
     @Field({ nullable: true })

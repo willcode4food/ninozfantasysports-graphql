@@ -3,7 +3,7 @@ import { Field, ID, InputType } from 'type-graphql'
 import { User } from './UserEntity'
 
 @InputType()
-export class UserUpdateInputType implements Partial<User> {
+export default class UserUpdateInputType implements Partial<User> {
     @Field(() => ID)
     id: string
 
