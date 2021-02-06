@@ -1,12 +1,9 @@
 import { InputType, Field, ID } from 'type-graphql'
 import { IsDate, Length, IsNotEmpty } from 'class-validator'
-import { Season } from './SeasonEntity'
+import { Season } from '../SeasonEntity'
 
 @InputType()
-export default class SeasonUpdateInputType implements Partial<Season> {
-    @Field(() => ID)
-    id: string
-
+export default class SeasonInputType implements Partial<Season> {
     @Field(() => ID)
     leagueId: string
 
