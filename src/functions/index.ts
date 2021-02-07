@@ -11,6 +11,7 @@ require('dotenv')
 initialize()
 import { UserResolver } from './features/Users/UserResolver'
 import { LeagueResolver } from './features/Leagues/LeagueResolver'
+import { LeagueRegistrationResolver } from './features/LeagueRegistration/LeagueRegistrationResolver'
 import { SeasonResolver } from './features/Seasons/SeasonResolver'
 
 const app = express()
@@ -20,7 +21,7 @@ app.use(<MiddleWareFn>authMiddleware)
 
 const schemaPath = process.env.NODE_ENV === 'development' ? './tmp' : '/tmp'
 const schema = buildSchemaSync({
-    resolvers: [UserResolver, LeagueResolver, SeasonResolver],
+    resolvers: [UserResolver, LeagueResolver, SeasonResolver, LeagueRegistrationResolver],
     emitSchemaFile: `${schemaPath}/schema.gql`,
     validate: false,
 })
