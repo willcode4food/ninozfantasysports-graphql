@@ -1,7 +1,7 @@
-import { Resolver, Mutation, Arg, Query } from 'type-graphql'
-import { User, UserEntityRepository } from './UserEntity'
+import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import UserInput from './types/UserInput'
 import UserUpdateInput from './types/UserUpdateInput'
+import { User, UserEntityRepository } from './UserEntity'
 
 export const resolveUser = () => User
 @Resolver(resolveUser)

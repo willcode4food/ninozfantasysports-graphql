@@ -1,7 +1,7 @@
-import { UserEntityRepository } from '../Users/UserEntity'
-import { Resolver, Mutation, Arg, Query } from 'type-graphql'
-import { League, LeagueRepository } from './LeagueEntity'
+import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import { SeasonRepository } from '../Seasons/SeasonEntity'
+import { UserEntityRepository } from '../Users/UserEntity'
+import { League, LeagueRepository } from './LeagueEntity'
 import LeagueInput from './types/LeagueInput'
 import LeagueUpdateInput from './types/LeagueUpdateInput'
 

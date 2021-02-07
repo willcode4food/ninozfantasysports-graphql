@@ -1,5 +1,5 @@
-import { getRepository, Collection } from 'fireorm'
-import { ObjectType, Field, ID, Int } from 'type-graphql'
+import { Collection, getRepository } from 'fireorm'
+import { Field, ID, Int, ObjectType } from 'type-graphql'
 
 export const returnId = () => ID
 export const returnInt = () => Int

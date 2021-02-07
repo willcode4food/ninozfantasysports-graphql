@@ -1,5 +1,5 @@
-import { InputType, Field, ID } from 'type-graphql'
-import { Length, IsNotEmpty, IsIn } from 'class-validator'
+import { IsIn, IsNotEmpty, Length } from 'class-validator'
+import { Field, ID, InputType } from 'type-graphql'
 import { League } from '../LeagueEntity'
 
 @InputType()

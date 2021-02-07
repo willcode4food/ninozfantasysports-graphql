@@ -24,3 +24,5 @@ export class LeagueRegistration {
     @Field()
     isActive: boolean
 }
+
+export const LeagueRegistrationRepository = getRepository(LeagueRegistration)
