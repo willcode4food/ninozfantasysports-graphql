@@ -5,7 +5,7 @@ import { User } from '../UserEntity'
 import IsNotEmailAlreadyExistsDecorator from '../decorators/IsNotEmailAlreadyExistsDecorator'
 import IsNotUsernameAlreadyExistsDecorator from '../decorators/IsNotUsernameAlreadyExistsDecorator'
 @InputType()
-export default class UserInputType implements Partial<User> {
+export default class UserInput implements Partial<User> {
     @Field(() => ID)
     id: string
 

@@ -1,8 +1,8 @@
 import { League } from '../Leagues/LeagueEntity'
 import { Mutation, Arg, Query, Resolver } from 'type-graphql'
 import { Season, SeasonRepository } from './SeasonEntity'
-import SeasonInputType from './types/SeasonInputType'
-import SeasonUpdateInputType from './types/SeasonUpdateInputType'
+import SeasonInput from './types/SeasonInput'
+import SeasonUpdateInput from './types/SeasonUpdateInput'
 
 export const resolveSeason = () => Season
 
@@ -25,7 +25,7 @@ export class SeasonResolver {
 
     @Mutation(() => Season)
     async createSeason(
-        @Arg('data', { validate: true }) { name, startDate, endDate, leagueId }: SeasonInputType
+        @Arg('data', { validate: true }) { name, startDate, endDate, leagueId }: SeasonInput
     ): Promise<Season> {
         let season: Season = {
             id: '',
@@ -54,7 +54,7 @@ export class SeasonResolver {
 
     @Mutation(() => Season)
     async updateSeason(
-        @Arg('data', { validate: true }) { id, name, startDate, endDate, leagueId }: SeasonUpdateInputType
+        @Arg('data', { validate: true }) { id, name, startDate, endDate, leagueId }: SeasonUpdateInput
     ): Promise<Season> {
         let season: Season = {
             id: '',

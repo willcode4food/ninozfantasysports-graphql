@@ -3,7 +3,7 @@ import { Length, IsNotEmpty, IsIn } from 'class-validator'
 import { League } from '../LeagueEntity'
 
 @InputType()
-export default class LeagueInputType implements Partial<League> {
+export default class LeagueInput implements Partial<League> {
     @Field()
     @Length(2, 255)
     @IsNotEmpty()

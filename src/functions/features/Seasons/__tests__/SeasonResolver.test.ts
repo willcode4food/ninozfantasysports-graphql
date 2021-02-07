@@ -48,7 +48,7 @@ describe('Season Resolver', () => {
     })
 
     const createSeasonMutation = `
-        mutation CreateSeason($data:SeasonInputType!) {
+        mutation CreateSeason($data:SeasonInput!) {
             createSeason(data: $data) {
                 id
                 name
@@ -57,7 +57,7 @@ describe('Season Resolver', () => {
         }
     `
     const updateSeasonMutation = `
-        mutation UpdateSeason($data: SeasonUpdateInputType!) {
+        mutation UpdateSeason($data: SeasonUpdateInput!) {
             updateSeason(data: $data) {
                 id
                 name

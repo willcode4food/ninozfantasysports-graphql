@@ -36,7 +36,7 @@ describe('User Resolver', () => {
     })
 
     const createUserMutation = `
-        mutation CreateUser($data:UserInputType!) {
+        mutation CreateUser($data:UserInput!) {
             createUser(data: $data) {
                 firstName
                 lastName
@@ -49,7 +49,7 @@ describe('User Resolver', () => {
         }
     `
     const updateUserMutation = `
-        mutation UpdateUser($data: UserUpdateInputType!) {
+        mutation UpdateUser($data: UserUpdateInput!) {
             updateUser(data: $data) {
                 firstName
                 lastName
