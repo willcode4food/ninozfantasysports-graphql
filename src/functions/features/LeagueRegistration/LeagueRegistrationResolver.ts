@@ -2,6 +2,7 @@ import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import { League } from '../Leagues/LeagueEntity'
 import { LeagueRegistration, LeagueRegistrationRepository } from './LeagueRegistrationEntity'
 import LeagueRegistrationInput from './types/LeagueRegistrationInput'
+import LeagueRegistrationUpdateInput from './types/LeagueRegistrationUpdateInput'
 
 export const resolveLeagueRegistration = () => LeagueRegistration
 
@@ -43,6 +44,29 @@ export class LeagueRegistrationResolver {
             entity.isActive = true
             entity.dateRegistered = new Date()
             leagueRegistration = await LeagueRegistrationRepository.create(entity)
+            return leagueRegistration
+        } catch (e) {
+            throw new Error(e.message)
+        }
+    }
+
+    @Mutation(() => LeagueRegistration)
+    async updateLeagueRegistration(
+        @Arg('data', { validate: true }) { id, isActive }: LeagueRegistrationUpdateInput
+    ): Promise<LeagueRegistration> {
+        let leagueRegistration: LeagueRegistration = {
+            id: '',
+            userId: '',
+            seasonId: '',
+            leagueId: '',
+            isActive: true,
+            dateRegistered: new Date(),
+        }
+
+        try {
+            const registrationToUpdate = await LeagueRegistrationRepository.findById(id)
+            registrationToUpdate.isActive = isActive
+            leagueRegistration = await LeagueRegistrationRepository.update(registrationToUpdate)
             return leagueRegistration
         } catch (e) {
             throw new Error(e.message)
