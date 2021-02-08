@@ -4,12 +4,12 @@ import {
     ValidatorConstraint,
     ValidatorConstraintInterface,
 } from 'class-validator'
-import { UserEntityRepository } from '../UserEntity'
+import { UserRepository } from '../UserEntity'
 
 @ValidatorConstraint({ async: true })
 export class IsNotUsernameAlreadyExistsConstraint implements ValidatorConstraintInterface {
     validate(username: string) {
-        return UserEntityRepository.whereEqualTo('username', username)
+        return UserRepository.whereEqualTo('username', username)
             .findOne()
             .then((user) => {
                 if (user) return false

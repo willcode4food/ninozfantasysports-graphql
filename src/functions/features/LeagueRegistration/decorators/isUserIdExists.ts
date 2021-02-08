@@ -4,12 +4,12 @@ import {
     ValidatorConstraint,
     ValidatorConstraintInterface,
 } from 'class-validator'
-import { UserEntityRepository } from '../../Users/UserEntity'
+import { UserRepository } from '../../Users/UserEntity'
 
 @ValidatorConstraint({ async: true })
 export class IsUserIdExistsConstraint implements ValidatorConstraintInterface {
     validate(userId: string) {
-        return UserEntityRepository.findById(userId).then((user) => {
+        return UserRepository.findById(userId).then((user) => {
             if (user) {
                 return true
             }

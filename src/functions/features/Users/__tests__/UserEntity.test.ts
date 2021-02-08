@@ -1,7 +1,6 @@
 import { BaseFirestoreRepository } from 'fireorm'
 import { initialize } from 'fireorm/lib/src/MetadataStorage'
 import { ID, Int } from 'type-graphql'
-import { User } from '../UserEntity'
 
 const MockFirebase = require('mock-cloud-firestore')
 const fixtureData = {
@@ -27,8 +26,8 @@ describe('User Entity Repository', () => {
         initialize(firestore)
     })
     it('should be an instance of BaseRespository', () => {
-        const { UserEntityRepository } = require('../UserEntity')
-        expect(UserEntityRepository).toBeInstanceOf(BaseFirestoreRepository)
+        const { UserRepository } = require('../UserEntity')
+        expect(UserRepository).toBeInstanceOf(BaseFirestoreRepository)
     })
     it('has IDs that are the correct type', () => {
         const { returnId, returnInt } = require('../UserEntity')
@@ -36,8 +35,8 @@ describe('User Entity Repository', () => {
         expect(returnInt()).toBe(Int)
     })
     it('returns a user with first name, last name, username, and email for the given ID', async () => {
-        const { UserEntityRepository } = require('../UserEntity')
-        const User = await UserEntityRepository.findById('AUsewNSXhRJuoKZoqiqdgIDWHp2')
+        const { UserRepository } = require('../UserEntity')
+        const User = await UserRepository.findById('AUsewNSXhRJuoKZoqiqdgIDWHp2')
         expect(User.id).toBe('AUsewNSXhRJuoKZoqiqdgIDWHp2')
         expect(User.firstName).toBe('Homer')
         expect(User.lastName).toBe('Simpson')
@@ -45,7 +44,7 @@ describe('User Entity Repository', () => {
         expect(User.email).toBe('hsimpson@springfieldpower.com')
     })
     it('will create a new User', async () => {
-        const { UserEntityRepository, User } = require('../UserEntity')
+        const { UserRepository, User } = require('../UserEntity')
         const expectedEmail = 'lsimpson@springfield.net'
         const expectedFirstName = 'Lisa'
         const expectedLastName = 'Simpson'
@@ -58,7 +57,7 @@ describe('User Entity Repository', () => {
         entity.username = expectedUsername
         entity.firstName = expectedFirstName
         entity.lastName = expectedLastName
-        const user = await UserEntityRepository.create(entity)
+        const user = await UserRepository.create(entity)
         expect(user).toBeInstanceOf(User)
         expect(user.firstName).toBe(expectedFirstName)
         expect(user.lastName).toBe(expectedLastName)
@@ -66,12 +65,12 @@ describe('User Entity Repository', () => {
         expect(user.email).toBe(expectedEmail)
     })
     it('will update a user with the correct data', async () => {
-        const { UserEntityRepository } = require('../UserEntity')
+        const { UserRepository } = require('../UserEntity')
         const expectedFirstName = 'Marge'
-        const userToUpdate = await UserEntityRepository.findById('AUsewNSXhRJuoKZoqiqdgIDWHp2')
+        const userToUpdate = await UserRepository.findById('AUsewNSXhRJuoKZoqiqdgIDWHp2')
         expect(userToUpdate.firstName).toBe('Homer')
         userToUpdate.firstName = expectedFirstName
-        const updatedUser = await UserEntityRepository.update(userToUpdate)
+        const updatedUser = await UserRepository.update(userToUpdate)
         expect(updatedUser.firstName).toBe(expectedFirstName)
     })
 })
