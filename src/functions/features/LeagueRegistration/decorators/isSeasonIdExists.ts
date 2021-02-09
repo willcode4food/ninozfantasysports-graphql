@@ -7,10 +7,10 @@ import {
 import { SeasonRepository } from '../../Seasons/SeasonEntity'
 
 @ValidatorConstraint({ async: true })
-export class IsSeasonsIdExistsConstraint implements ValidatorConstraintInterface {
-    validate(userId: string) {
-        return SeasonRepository.findById(userId).then((user) => {
-            if (user) {
+export class IsSeasonIdExistsConstraint implements ValidatorConstraintInterface {
+    validate(seasonId: string) {
+        return SeasonRepository.findById(seasonId).then((season) => {
+            if (season) {
                 return true
             }
             return false
@@ -19,14 +19,14 @@ export class IsSeasonsIdExistsConstraint implements ValidatorConstraintInterface
 }
 
 // istanbul ignore next
-export default function IsSeasonsIdExists(validationOptions?: ValidationOptions) {
+export default function IsSeasonIdExists(validationOptions?: ValidationOptions) {
     return function (object: Object, propertyName: string) {
         registerDecorator({
             target: object.constructor,
             propertyName: propertyName,
             options: validationOptions,
             constraints: [],
-            validator: IsSeasonsIdExistsConstraint,
+            validator: IsSeasonIdExistsConstraint,
         })
     }
 }
