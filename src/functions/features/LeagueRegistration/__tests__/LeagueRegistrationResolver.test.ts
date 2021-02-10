@@ -155,7 +155,7 @@ describe('League Registration Resolver', () => {
         })
         expect(response.data.returnLeagueRegistrationByUser.length).toBe(1)
     })
-    it('returns a season by a valid seaon id', async () => {
+    it('returns a season by a valid season id', async () => {
         const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const response = await graphqlCall({
             source: getRegistrationBySeason,
@@ -166,7 +166,7 @@ describe('League Registration Resolver', () => {
         expect(response.data.returnLeagueRegistrationBySeason.length).toBe(1)
     })
 
-    it('returns a league by a valid seaon id', async () => {
+    it('returns a league by a valid league id', async () => {
         const { graphqlCall } = require('../../../../test-utils/graphqlCall')
         const response = await graphqlCall({
             source: getRegistrationByLeague,
