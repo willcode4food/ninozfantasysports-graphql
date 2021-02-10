@@ -66,7 +66,7 @@ describe('League Resolver', () => {
     })
 
     const createLeagueMutation = `
-        mutation CreateLeague($data:LeagueInputType!) {
+        mutation CreateLeague($data:LeagueInput!) {
             createLeague(data: $data) {
                 id
                 description
@@ -77,7 +77,7 @@ describe('League Resolver', () => {
         }
     `
     const updateLeagueMutation = `
-        mutation UpdateLeague($data: LeagueUpdateInputType!) {
+        mutation UpdateLeague($data: LeagueUpdateInput!) {
             updateLeague(data: $data) {
                 id
                 description

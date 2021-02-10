@@ -1,28 +1,28 @@
-import { Resolver, Mutation, Arg, Query } from 'type-graphql'
-import { User, UserEntityRepository } from './UserEntity'
-import UserInputType from './types/UserInputType'
-import UserUpdateInputType from './types/UserUpdateInputType'
+import { Arg, Mutation, Query, Resolver } from 'type-graphql'
+import UserInput from './types/UserInput'
+import UserUpdateInput from './types/UserUpdateInput'
+import { User, UserRepository } from './UserEntity'
 
 export const resolveUser = () => User
 @Resolver(resolveUser)
 export class UserResolver {
     @Query((_returns) => User, { nullable: false })
     async returnSingleUser(@Arg('id') id: string): Promise<User> {
-        return await UserEntityRepository.findById(id)
+        return await UserRepository.findById(id)
     }
 
     @Query(() => [User])
     async returnAllUsers(): Promise<User[]> {
-        return await UserEntityRepository.find()
+        return await UserRepository.find()
     }
 
     async isDuplicateUsernameForLoggedInUser(id: string, username: string): Promise<Boolean> {
-        const possibleDupUsernames = await UserEntityRepository.whereEqualTo('username', username).find()
+        const possibleDupUsernames = await UserRepository.whereEqualTo('username', username).find()
         return possibleDupUsernames.filter((possibleDup: User) => possibleDup.id !== id).length > 0
     }
 
     async isDuplicateEmailForLoggedInUser(@Arg('id') id: string, @Arg('email') email: string): Promise<Boolean> {
-        const possibleDupUsernames = await UserEntityRepository.whereEqualTo('email', email).find()
+        const possibleDupUsernames = await UserRepository.whereEqualTo('email', email).find()
         return possibleDupUsernames.filter((possibleDup: User) => possibleDup.id !== id).length > 0
     }
     @Mutation(() => User)
@@ -40,7 +40,7 @@ export class UserResolver {
             city,
             state,
             zip,
-        }: UserInputType
+        }: UserInput
     ): Promise<User> {
         const entity = new User()
         entity.id = id
@@ -56,14 +56,14 @@ export class UserResolver {
         entity.zip = zip
         entity.dateCreated = new Date()
         entity.dateUpdated = new Date()
-        const user = await UserEntityRepository.create(entity)
+        const user = await UserRepository.create(entity)
         return user
     }
 
     @Mutation(() => User)
     async updateUser(
         @Arg('data', { validate: true })
-        { id, email, firstName, lastName, profileImageName, city, state, username, zip }: UserUpdateInputType
+        { id, email, firstName, lastName, profileImageName, city, state, username, zip }: UserUpdateInput
     ): Promise<User> {
         let user: User = {
             id: '',
@@ -82,7 +82,7 @@ export class UserResolver {
         }
 
         try {
-            const userToUpdate = await UserEntityRepository.findById(id)
+            const userToUpdate = await UserRepository.findById(id)
             if (!userToUpdate) {
                 throw new Error('UserId is invalid')
             }
@@ -103,7 +103,7 @@ export class UserResolver {
             userToUpdate.state = state || userToUpdate.state || ''
             userToUpdate.zip = zip || userToUpdate.zip || ''
             userToUpdate.dateUpdated = new Date()
-            user = await UserEntityRepository.update(userToUpdate)
+            user = await UserRepository.update(userToUpdate)
             return user
         } catch (e) {
             console.log(e.message)
@@ -114,7 +114,7 @@ export class UserResolver {
     @Mutation(() => Boolean)
     async removeSingleUser(@Arg('id') id: string): Promise<boolean> {
         try {
-            await UserEntityRepository.delete(id)
+            await UserRepository.delete(id)
             return true
         } catch (e) {
             throw new Error(e.message)

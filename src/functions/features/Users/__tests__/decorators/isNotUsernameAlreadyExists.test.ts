@@ -26,12 +26,12 @@ describe('Username Exists Input Validator - Custom Decorator', () => {
     })
 
     it('returns true if username already exists', async () => {
-        const { IsNotUsernameAlreadyExistsConstraint } = require('../../decorators/IsNotUsernameAlreadyExistsDecorator')
+        const { IsNotUsernameAlreadyExistsConstraint } = require('../../decorators/IsNotUsernameAlreadyExists')
         const isUsernameAlreadyExist = await IsNotUsernameAlreadyExistsConstraint.prototype.validate('hsimpson')
         expect(isUsernameAlreadyExist).toBe(false)
     })
     it('returns false if username does not exist', async () => {
-        const { IsNotUsernameAlreadyExistsConstraint } = require('../../decorators/IsNotUsernameAlreadyExistsDecorator')
+        const { IsNotUsernameAlreadyExistsConstraint } = require('../../decorators/IsNotUsernameAlreadyExists')
         const isUsernameAlreadyExist = await IsNotUsernameAlreadyExistsConstraint.prototype.validate('lsimpson')
         expect(isUsernameAlreadyExist).toBe(true)
     })

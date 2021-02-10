@@ -1,7 +1,6 @@
 import { BaseFirestoreRepository } from 'fireorm'
 import { initialize } from 'fireorm/lib/src/MetadataStorage'
 import { ID } from 'type-graphql'
-// import { LeagueRepository } from '../LeagueEntity'
 
 const MockFirebase = require('mock-cloud-firestore')
 const expectedLeagueId = 'BQzNm7DPdpInAy6sRCxL'

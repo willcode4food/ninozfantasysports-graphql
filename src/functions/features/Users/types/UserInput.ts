@@ -1,11 +1,10 @@
-import { InputType, Field, ID, Int } from 'type-graphql'
-import { Length, IsEmail, IsNotEmpty, IsIn } from 'class-validator'
+import { IsEmail, IsIn, IsNotEmpty, Length } from 'class-validator'
+import { Field, ID, InputType, Int } from 'type-graphql'
+import IsNotEmailAlreadyExists from '../decorators/IsNotEmailAlreadyExists'
+import IsNotUsernameAlreadyExists from '../decorators/IsNotUsernameAlreadyExists'
 import { User } from '../UserEntity'
-// import { IsNotUsernameAlreadyExists, IsNotEmailAlreadyExistsDecorator } from '../../resolvers/decorators'
-import IsNotEmailAlreadyExistsDecorator from '../decorators/IsNotEmailAlreadyExistsDecorator'
-import IsNotUsernameAlreadyExistsDecorator from '../decorators/IsNotUsernameAlreadyExistsDecorator'
 @InputType()
-export default class UserInputType implements Partial<User> {
+export default class UserInput implements Partial<User> {
     @Field(() => ID)
     id: string
 
@@ -16,7 +15,7 @@ export default class UserInputType implements Partial<User> {
     @Field({ nullable: false })
     @IsNotEmpty()
     @IsEmail()
-    @IsNotEmailAlreadyExistsDecorator({ message: 'A user with that email address has already registered.' })
+    @IsNotEmailAlreadyExists({ message: 'A user with that email address has already registered.' })
     email: string
 
     @Field({ nullable: false })
@@ -37,7 +36,7 @@ export default class UserInputType implements Partial<User> {
 
     @Field({ nullable: false })
     @Length(2, 255)
-    @IsNotUsernameAlreadyExistsDecorator({ message: 'Sorry, the username, $value has been taken.' })
+    @IsNotUsernameAlreadyExists({ message: 'Sorry, the username, $value has been taken.' })
     username: string
 
     @Field({ nullable: true })
