@@ -1,5 +1,5 @@
 import { BaseFirestoreRepository } from 'fireorm'
-import { initialize } from 'fireorm/lib/src/MetadataStorage'
+import { initialize } from 'fireorm/lib/src/MetadataUtils'
 import { ID, Int } from 'type-graphql'
 
 const MockFirebase = require('mock-cloud-firestore')
