@@ -1,4 +1,4 @@
-import { initialize } from 'fireorm/lib/src/MetadataStorage'
+import { initialize } from 'fireorm/lib/src/MetadataUtils'
 
 const MockFirebase = require('mock-cloud-firestore')
 
