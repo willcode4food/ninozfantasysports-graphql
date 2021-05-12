@@ -22,4 +22,8 @@ _(Assumes you have a Firebase Account Created)_
 4. In another terminal window run the firebase dev server  
     `npm run serve `
 
+5. Visit GraphQL Playground in your browser
+
+`http://localhost:5000/ninozfantasysports-6de5b/us-central1/api`
+
 Check out https://github.com/erikras/ducks-modular-redux
